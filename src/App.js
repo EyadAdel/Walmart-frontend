@@ -7,6 +7,7 @@ import LoginEmail from "./Pages/loginEmail/login";
 import LoginPassword from "./Pages/loginPassword/loginPassword";
 import Signup from "./Pages/signup/signup";
 import Electronics from "./Components/Electronics/Electronics";
+import Product from "./Components/Product/Product";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/account" element={<Account />} />
         <Route path="/electronics" element={<Electronics />} />
+        <Route path="/cameraProduct" element={<Product />} />
       </Routes>
     </div>
   );

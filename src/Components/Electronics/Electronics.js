@@ -131,7 +131,7 @@ const Electronics = () => {
       <div className="trending">
         <h5 className="p-5 mx-8 font-bold text-lg">Trending tech we love</h5>
 
-        <div className="card flex flex-auto justify-center gap-6 mb-8">
+        <div className=" flex flex-auto justify-center gap-6 mb-8">
           <div className="card_left ">
             <div class="max-w-xlg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
               <a href="#">
@@ -718,7 +718,7 @@ const Electronics = () => {
             <img src={image2} />
           </div>
           <h5 className="py-5 mx-4 font-bold text-lg">Explore more</h5>
-          <div className="card flex justify-around gap-6 mb-8">
+          <div className=" flex justify-around gap-6 mb-8">
             <div className="card_left ">
               <div class="max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
                 <a href="#">

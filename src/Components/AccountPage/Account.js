@@ -249,7 +249,7 @@ function Account() {
             </div>
             {/* Wallet */}
             <div className="bg-sky-50 h-72 rounded-lg shadow-gray-300 shadow-md ml-5 mr-28 mt-12">
-              <div className="flex justify-between items-center p-5">
+              <div className="flex justify-between items-center py-2 px-5">
                 <div className="flex">
                   <span className="pt-2 pr-4 text-xl">
                     <BsWallet2 />
@@ -259,13 +259,13 @@ function Account() {
                 </div>
                 <IoIosArrowForward />
               </div>
-              <p className="text-sm pl-5">
+              <p className="text-sm pl-5 ml-5">
                 Learn more about <a href="">payment methods</a> we accept.
               </p>
               <div className="grid grid-cols-4">
                 <div className="bg-white h-28 rounded-lg shadow-gray-300 shadow-md mt-5 ml-5">
                   <div className="flex flex-col items-center">
-                    <CreditCardImg className="mt-5" />
+                    <CreditCardImg className="mt-3" />
                     <h2 className="font-bold text-sm pt-4">
                       Credit/debit card
                     </h2>
@@ -273,7 +273,7 @@ function Account() {
                 </div>
                 <div className="bg-white h-28 rounded-lg shadow-gray-300 shadow-md mt-5 ml-5">
                   <div className="flex flex-col items-center">
-                    <img src={GiftImage} className="w-20 mt-5" />
+                    <img src={GiftImage} className="w-20 mt-3" />
                     <h2 className="font-bold text-sm pt-2">Gift card</h2>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ function Account() {
                 </div>
                 <div className="bg-white h-28 rounded-lg shadow-gray-300 shadow-md mt-5 mx-5">
                   <div className="flex flex-col items-center">
-                    <img src={BenefitImage} className="w-20 mt-5" />
+                    <img src={BenefitImage} className="w-20 mt-3" />
                     <h2 className="font-bold text-sm pt-2">Benefit card</h2>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ import React from "react";
 import img1 from "../../assets/product1.webp";
 function Card() {
   return (
-    <div className=" card flex justify-center">
+    <div className="flex justify-center">
       <div className="block w-52  bg-white dark:bg-neutral-700">
         <a href="#!">
           <img className="" src={img1} alt="" />

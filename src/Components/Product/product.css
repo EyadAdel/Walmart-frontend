@@ -1,0 +1,138 @@
+.o_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.list_element {
+  display: inline-block;
+}
+
+.button {
+  font-size: 1rem;
+  vertical-align: -0.175em;
+  width: 1rem;
+  height: 1rem;
+  box-sizing: content-box;
+}
+
+#shopping {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border-color: black;
+  box-shadow: 0 1px 2px 1px #00000026;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#buy_btn:hover {
+  background-color: black;
+  color: #fff;
+}
+.addToCart_btn {
+  background-color: #0071ce;
+  color: #fff;
+  border: none;
+}
+.addToCart_btn:hover {
+  background-color: #1d5b8d;
+}
+
+#v-line.vertical {
+  transform: rotate(90deg);
+}
+
+.r_underline:hover {
+  color: #0071ce;
+  text-decoration: none;
+}
+
+.r_underl {
+  text-decoration: underline;
+}
+.r_underl:hover {
+  text-decoration: none;
+  color: #0071ce;
+}
+
+#displayed-img:hover {
+  transform: scale(1.6);
+  transition: transform 0.7s ease;
+  cursor: crosshair;
+}
+.prevent_flow {
+  overflow: hidden;
+  position: relative;
+}
+
+.boxStyle {
+  box-sizing: border-box;
+  padding: 8px;
+  inline-size: 600px;
+  max-inline-size: min(100%, 600px);
+}
+
+#scroll-element {
+  height: 4vh;
+}
+
+.detial {
+  text-indent: 10px;
+}
+
+.sm-images {
+  box-sizing: border-box;
+  padding: 8px;
+  inline-size: 366px;
+  max-inline-size: min(100%, 366px);
+}
+
+.Specifications_text {
+  text-indent: 10px;
+}
+
+.report_link:hover {
+  text-decoration: none;
+  color: #0071ce;
+}
+
+.master_card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border-color: black;
+  box-shadow: 0 1px 2px 1px #00000026;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.earn_price {
+  color: rgb(46, 47, 50);
+  font-weight: bold;
+  border-bottom: 3px solid #0071ce;
+}
+
+.style_master_card{
+    width: 70px;
+    height: min-content;
+}
+
+.font_s{
+    font-size: 76px;
+}
+.see_all_reviews_btn:hover{
+    color: white;
+}
+
+.p_width{
+  width: 300px;
+  height: 7px;
+}
+
+.font_size{
+  font-size: medium;
+}
+.F_button{
+  border: 3px solid black;
+
+}
