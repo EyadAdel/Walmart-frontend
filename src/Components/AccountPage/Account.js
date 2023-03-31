@@ -38,8 +38,7 @@ function Account() {
   return (
     <>
       <Navbar />
-      <section>
-        {" "}
+      <section className="mb-10">
         {/* container */}
         <div className="p-4 ml-20 mb-6">
           <Link to="/account" className="text-sm m-2">

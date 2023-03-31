@@ -11,11 +11,11 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/account" element={<Account />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginEmail />} />
         <Route path="/loginpass" element={<LoginPassword />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
     </div>
   );
