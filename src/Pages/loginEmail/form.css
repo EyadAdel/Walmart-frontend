@@ -1,0 +1,18 @@
+/* .invalid-feedback {
+  display: block;
+  color: #dc3545;
+}
+.invalid {
+  border-color: #dc3545 !important;
+} */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+.all {
+  width: 30%;
+}
+.all img {
+  max-width: 100%;
+  /* width: 90px; */
+  height: 68px;
+}
