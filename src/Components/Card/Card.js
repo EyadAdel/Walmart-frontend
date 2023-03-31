@@ -1,10 +1,12 @@
 import React from "react";
 import img1 from "../../assets/product1.webp";
+import { useNavigate } from "react-router-dom";
 function Card() {
+  const navigate = useNavigate();
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center" onClick={navigate("/cameraProduct")}>
       <div className="block w-52  bg-white dark:bg-neutral-700">
-        <a href="#!">
+        <a href="#">
           <img className="" src={img1} alt="" />
         </a>
         <div className="p-6">
