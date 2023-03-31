@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 function Card() {
   const navigate = useNavigate();
   return (
-    <div className="flex justify-center" onClick={navigate("/cameraProduct")}>
+    <div
+      className="flex justify-center"
+      onClick={() => {
+        navigate("/cameraProduct");
+      }}
+    >
       <div className="block w-52  bg-white dark:bg-neutral-700">
-        <a href="#">
-          <img className="" src={img1} alt="" />
-        </a>
+        <img className="cursor-pointer" src={img1} alt="" />
         <div className="p-6">
           <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
             $20.25

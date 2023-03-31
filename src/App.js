@@ -1,6 +1,4 @@
-import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
-import Footer from "./Components/Footer/Footer";
 import Account from "./Components/AccountPage/Account";
 import { Route, Routes } from "react-router-dom";
 import LoginEmail from "./Pages/loginEmail/login";
