@@ -10,18 +10,30 @@ import { CgShoppingCart } from "react-icons/cg";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import { BiHome } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
   return (
     <div className="bg-[#017cc2] sticky top-0  z-10">
       <div className=" text-white flex items-center justify-between">
         {/* Left */}
         <div className="flex items-center gap-x-4">
-          <div className="cursor-pointer">
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <img src={logo} alt="" className="h-24" />
           </div>
 
-          <div className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer">
+          <div
+            onClick={() => {
+              navigate("/electronics");
+            }}
+            className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
+          >
             <TiThLargeOutline />
             <p className="">Departments</p>
           </div>
@@ -52,7 +64,12 @@ function Navbar() {
           </div>
           <div className="flex items-center mx-8 gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] px-3 rounded-full cursor-pointer">
             <AiOutlineUser />
-            <div className="">
+            <div
+              className=""
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
               <p className="text-xs font-semibold">Sign In</p>
               <h5 className="text-base">Account</h5>
             </div>
