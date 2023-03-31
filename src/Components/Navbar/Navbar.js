@@ -13,7 +13,7 @@ import { BiHome } from "react-icons/bi";
 
 function Navbar() {
   return (
-    <div className="bg-[#017cc2] w-screen fixed  z-10">
+    <div className="bg-[#017cc2] sticky top-0  z-10">
       <div className=" text-white flex items-center justify-between">
         {/* Left */}
         <div className="flex items-center gap-x-4">

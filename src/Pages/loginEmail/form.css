@@ -8,11 +8,12 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
-.all {
+/* .all {
   width: 30%;
 }
 .all img {
   max-width: 100%;
-  /* width: 90px; */
   height: 68px;
-}
+} */
+
+/* width: 90px; */
