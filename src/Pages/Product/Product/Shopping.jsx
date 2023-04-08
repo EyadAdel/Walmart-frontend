@@ -2,6 +2,7 @@ import React from 'react'
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { CiDeliveryTruck } from "react-icons/ci";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsShop } from "react-icons/bs";
 import { SlPresent } from "react-icons/sl";
 
@@ -233,9 +234,9 @@ export default function Shopping() {
               </div>
               <hr className="mt-3 opacity-10" id="v-line" />
               <div className="mx-2 my-2 ">
-                <h2 className="fw-bold">More seller options (4)</h2>
+                <h6 className="fw-bold">More seller options (4)</h6>
                 <p className="pt-3">Starting from $369.99</p>
-                <a href="#fgff" className="r_underl">
+                <a href="#fgff" className="r_underl text-black">
                   Compare all sellers
                 </a>
               </div>

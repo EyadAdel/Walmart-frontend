@@ -34,6 +34,7 @@
   background-color: #0071ce;
   color: #fff;
   border: none;
+  width: 150px;
 }
 .addToCart_btn:hover {
   background-color: #1d5b8d;
@@ -57,9 +58,15 @@
 }
 
 #displayed-img:hover {
-  transform: scale(1.6);
-  transition: transform 0.7s ease;
+  width: 612px;
+  height: 612px;
+}
+
+#displayed-img:hover {
+  /* transform: scale(1.6); */
+  /* transition: transform 0.7s ease; */
   cursor: crosshair;
+  border: 1px solid black;
 }
 .prevent_flow {
   overflow: hidden;
@@ -112,27 +119,26 @@
   border-bottom: 3px solid #0071ce;
 }
 
-.style_master_card{
-    width: 70px;
-    height: min-content;
+.style_master_card {
+  width: 70px;
+  height: min-content;
 }
 
-.font_s{
-    font-size: 76px;
+.font_s {
+  font-size: 76px;
 }
-.see_all_reviews_btn:hover{
-    color: white;
+.see_all_reviews_btn:hover {
+  color: white;
 }
 
-.p_width{
+.p_width {
   width: 300px;
-  height: 7px;
+  /* height: 7px; */
 }
 
-.font_size{
+.font_size {
   font-size: medium;
 }
-.F_button{
+.F_button {
   border: 3px solid black;
-
 }

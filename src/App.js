@@ -1,11 +1,11 @@
 import Home from "./Pages/Home/Home";
-import Account from "./Components/AccountPage/Account";
+import Account from "./Pages/AccountPage/Account";
 import { Route, Routes } from "react-router-dom";
 import LoginEmail from "./Pages/loginEmail/login";
 import LoginPassword from "./Pages/loginPassword/loginPassword";
 import Signup from "./Pages/signup/signup";
-import Electronics from "./Components/Electronics/Electronics";
-import Product from "./Components/Product/Product";
+import Electronics from "./Pages/Electronics/Electronics";
+import Product from "./Pages/Product/Product";
 
 function App() {
   return (

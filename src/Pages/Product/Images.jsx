@@ -1,15 +1,11 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import { MdOutlineKeyboardArrowUp } from "react-icons/md";
-import { BiErrorCircle } from "react-icons/bi";
-import Collapse from "react-bootstrap/Collapse";
 import ProductDetials from "./ProductDetials";
 import Specifications from "./Specifications";
 import { useState } from "react";
-
+import "./Product.css";
 export default function Images() {
   const [zoomStyle, setZoomStyle] = useState({});
-  // Create state variables for the image list and displayed image source
+
   const [imageList, setImageList] = useState([
     {
       src: "https://i5.walmartimages.com/asr/ce0f57f7-ad6f-4e0b-a7ae-f751068597c2_1.b7e1f1bab1fd7f98cb9aef1ae9b783fb.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -60,14 +56,12 @@ export default function Images() {
     const containerRect = container.getBoundingClientRect();
     const mouseX = event.clientX - containerRect.left;
     const mouseY = event.clientY - containerRect.top;
-    const zoomLevel = 1.2;
+    const zoomLevel = 1.6;
     const zoomX = (mouseX / containerRect.width) * 100;
     const zoomY = (mouseY / containerRect.height) * 100;
     const transformValue = `translate(-${zoomX}%, -${zoomY}%) scale(${zoomLevel})`;
     setZoomStyle({ transform: transformValue });
   }
-
-  
 
   function handleMouseLeave() {
     setZoomStyle({ transform: "translate(0, 0) scale(1)" });
@@ -83,10 +77,9 @@ export default function Images() {
   };
   return (
     <>
-      <div className="col-8">
-        <div className="row">
-          <div id="image-list" className="col-1 py-2">
-            <button></button>
+      <div className="col-8 ">
+        <div className="row flex gap-x-6">
+          <div id="image-list" className="col-2 py-2">
             {imageList.map((image) => (
               <img
                 className="Pimage"
@@ -104,29 +97,24 @@ export default function Images() {
                 }}
               />
             ))}
-            <div class="h3 tc justify-content-center">
-              <button
-                aria-label="next image"
-                class="h3 w3 pa0 ba bg-white b--black br4 pointer"
-              >
-                <span class="material-symbols-rounded">arrow_circle_down</span>
-              </button>
-            </div>
           </div>
-          <div className="col-11 prevent_flow">
+          <div
+            className="col-10 prevent_flow"
+            id="displayed-img"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
             <img
-              id="displayed-img"
               src={displayedImgSrc}
               width={612}
               height={612}
               alt=""
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
+              style={zoomStyle}
             />
           </div>
         </div>
-        <ProductDetials/>
-        <Specifications/>
+        <ProductDetials />
+        <Specifications />
       </div>
     </>
   );

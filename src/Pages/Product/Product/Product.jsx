@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Images from "./Images";
 
 export default function Product() {

@@ -1,4 +1,5 @@
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Nav() {
   return (
@@ -10,19 +11,19 @@ export default function Nav() {
               <ol className="o_list">
                 <li className="list_element">
                   <a
-                    className="w_MSFl gray underline"
+                    className="text-black gray underline"
                     itemprop="item"
                     href="/cp/electronics/3944"
                   >
                     <span itemprop="name">Electronics</span>
                   </a>
-                  <span aria-hidden="true" className="w_95To">
+                  <span aria-hidden="true" className="text-black">
                     /
                   </span>
                 </li>
                 <li className="list_element">
                   <a
-                    className="w_MSFl gray underline"
+                    className="text-black gray underline"
                     itemprop="item"
                     href="/cp/cameras-camcorders/133277"
                   >
@@ -34,7 +35,7 @@ export default function Nav() {
                 </li>
                 <li className="list_element">
                   <a
-                    className="w_MSFl black"
+                    className="text-black black"
                     itemprop="item"
                     href="/cp/dslr-cameras/1096663"
                   >
@@ -50,8 +51,8 @@ export default function Nav() {
                 className="col-1 p-2"
                 alt=""
               />
-              <p className="col-7 pl-1 fs-10 mt-2">
-                <h5 className="fw-bold d-inline">Ship free, no order min*</h5>As
+              <p className="col-7 pl-1 fs-7 mt-2">
+                <h5 className="fw-bold fs-6 d-inline">Ship free, no order min*</h5>As
                 often as you need.
               </p>
             </div>

@@ -3,6 +3,7 @@ import "./product.css";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { MdChatBubbleOutline } from "react-icons/md";
 import { AiFillStar } from "react-icons/ai";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomerReview from "./CustomerReview";
 
 export default function Specifications() {
@@ -12,30 +13,30 @@ export default function Specifications() {
       <div className="">
         <p>Specifications</p>
         <div className="pt-2">
-          <h1 className="fw-bold fs-7">Features</h1>
+          <h1 className="fw-bold fs-6">Features</h1>
           <p>
             DSLR quality photos & full HD movies, Powerful 18 Megapixel sensor,
             Precise auto focus
           </p>
         </div>
         <div className="pt-2">
-          <h1 className="fw-bold fs-7">Brand</h1>
+          <h1 className="fw-bold fs-6">Brand</h1>
           <p>Canon</p>
         </div>
         <div className="pt-2">
-          <h1 className="fw-bold fs-7">Manufacturer Part Number</h1>
+          <h1 className="fw-bold fs-6">Manufacturer Part Number</h1>
           <p>2628C029</p>
         </div>
         <div className="pt-2">
-          <h1 className="fw-bold fs-7">Manufacturer</h1>
+          <h1 className="fw-bold fs-6">Manufacturer</h1>
           <p>Canon</p>
         </div>
         <div className="pt-2">
-          <h1 className="fw-bold fs-7">Model</h1>
+          <h1 className="fw-bold fs-6">Model</h1>
           <p>T100</p>
         </div>
         <div className="pt-2">
-          <h1 className="fw-bold fs-7">
+          <h1 className="fw-bold fs-6">
             Assembled Product Dimensions (L x W x H)
           </h1>
           <p>5.08 x 7.33 x 3.04 Inches</p>
@@ -44,11 +45,11 @@ export default function Specifications() {
         <div className="py-3 ">
           <p>Warranty</p>
           <div className="pt-2">
-            <h1 className="fw-bold fs-7">Warranty length</h1>
+            <h1 className="fw-bold fs-6">Warranty length</h1>
             <p>1-year warranty</p>
           </div>
           <div className="pt-2">
-            <h1 className="fw-bold fs-7">Warranty information</h1>
+            <h1 className="fw-bold fs-6">Warranty information</h1>
             <p>Limited 1 year warranty</p>
           </div>
         </div>
@@ -58,7 +59,7 @@ export default function Specifications() {
             <MdChatBubbleOutline />
           </span>
           <span className="">
-            <a href="#kdla" className="report_link underline">
+            <a href="#kdla" className="report_link underline text-black">
               Report incorrect product information
             </a>
           </span>
@@ -82,7 +83,7 @@ export default function Specifications() {
         <div className="py-3 col d-flex">
           <div>
             <header className="">
-              <h2 className="fw-bold fs-3">Customer reviews & ratings</h2>
+              <h2 className="fw-bold fs-4">Customer reviews & ratings</h2>
             </header>
             <div className="fw-bold">
               <span className="font_s">4.5</span>
@@ -108,7 +109,7 @@ export default function Specifications() {
                 </div>
                 <button
                   type="button"
-                  class=" addToCart_btn btn btn-outline-dark fw-bold border-2  rounded-pill fs-7"
+                  class=" addToCart_btn rounded-pill fs-6"
                 >
                   Write a review
                 </button>
@@ -117,11 +118,11 @@ export default function Specifications() {
           </div>
         </div>
         <div className="fs-7 pt-5" >
-            <span className="d-flex "><a href="#lgdjl" className="underline"> 5 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={60} className="p_width"/></span></span>
-            <span className="d-flex "><a href="#lgdjl" className="underline"> 4 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={20} className="p_width"/></span></span>
-            <span className="d-flex "><a href="#lgdjl" className="underline"> 3 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={10} className="p_width"/></span></span>
-            <span className="d-flex "><a href="#lgdjl" className="underline"> 2 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={14} className="p_width"/></span></span>
-            <span className="d-flex "><a href="#lgdjl" className="underline"> 1 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={16} className="p_width"/></span></span>
+            <span className="d-flex "><a href="#lgdjl" className="underline"> 5 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={60} className="p_width h-50"/></span></span>
+            <span className="d-flex "><a href="#lgdjl" className="underline"> 4 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={20} className="p_width h-50"/></span></span>
+            <span className="d-flex "><a href="#lgdjl" className="underline"> 3 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={10} className="p_width h-50"/></span></span>
+            <span className="d-flex "><a href="#lgdjl" className="underline"> 2 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={14} className="p_width h-50"/></span></span>
+            <span className="d-flex "><a href="#lgdjl" className="underline"> 1 stars</a> 194 <span className="pt-2 pl-3"><ProgressBar now={16} className="p_width h-50"/></span></span>
           </div>
       </div>
       </div>

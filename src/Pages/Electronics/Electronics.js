@@ -3,8 +3,8 @@ import { BsWallet2, BsTruckFront, BsBoxArrowInDown } from "react-icons/bs";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import image from "../../assets/Electronics/bbb.png";
 import image2 from "../../assets/Electronics/bbb2.png";
-import Navbar from "./../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
+import Footer from "../../Components/Footer/Footer";
 
 const Electronics = () => {
   return (

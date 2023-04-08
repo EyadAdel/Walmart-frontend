@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
-import Card from "react-bootstrap/Card";
-
+import { Card } from "flowbite-react";
 export default function CustomerReview() {
   // const [Frequent_Mentions,] = useState([ "Pictures(63)",
   // "For Beginners",
@@ -43,29 +42,23 @@ export default function CustomerReview() {
   ]);
   return (
     <div>
-      <div className="d-flex justify-content-between ">
+      <div className="flex justify-between ">
         <div>
-          <h1 className="fw-bold ">Most helpful positive review</h1>
+          <h6 className="font-bold ">Most helpful positive review</h6>
           <p>54 customers found this helpful</p>
         </div>
         <div>
-          <h1 className="fw-bold ">Most helpful negative review</h1>
+          <h6 className="font-bold ">Most helpful negative review</h6>
         </div>
       </div>
-      <div className="d-flex justify-content-between pt-2">
+      <div className="flex  pt-2 justify-between">
         {reviewList.map((review) => {
           return (
-            <div className="pt-3">
-              <Card style={{ width: "18rem" }}>
-                <Card.Body>
-                  <Card.Title className="d-flex font_size">
-                    {review.reviewRate}
-                  </Card.Title>
-                  <Card.Title className="d-flex pt-2">
-                    {review.reviewTitle}
-                  </Card.Title>
-                  <Card.Text>{review.reviewText}</Card.Text>
-                </Card.Body>
+            <div className="pt-3 ">
+              <Card style={{ width: "18rem", height: "400px" }}>
+                <div className="flex font_size">{review.reviewRate}</div>
+                <h2 className="flex pt-2">{review.reviewTitle}</h2>
+                <p>{review.reviewText}</p>
               </Card>
             </div>
           );

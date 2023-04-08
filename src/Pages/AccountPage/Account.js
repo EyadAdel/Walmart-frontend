@@ -31,8 +31,8 @@ import StoreImage from "../../assets/AccountPage-Images/walmart store.png";
 import pharmacy from "../../assets/AccountPage-Images/pharmacy.png";
 import autocare from "../../assets/AccountPage-Images/autocare center.png";
 import customCake from "../../assets/AccountPage-Images/custom cake.png";
-import Footer from "../Footer/Footer";
-import Navbar from "../Navbar/Navbar";
+import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
 
 function Account() {
   return (
