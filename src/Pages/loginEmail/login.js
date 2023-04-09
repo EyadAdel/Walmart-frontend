@@ -3,9 +3,30 @@ import { Formik } from "formik";
 import "./form.css";
 import { MdError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const LoginEmail = () => {
+const LoginEmail = ({ setEmail }) => {
   const navigate = useNavigate();
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3333/customer/login",
+        {
+          email: values.email,
+        }
+      );
+      console.log(response.data);
+      if (response.data.isFound) {
+        setEmail(values.email);
+        navigate("/loginpass");
+      } else {
+        setEmail(values.email);
+        navigate("/signup");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className="mx-auto ">
@@ -32,12 +53,7 @@ const LoginEmail = () => {
 
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-            }}
+            onSubmit={handleSubmit}
           >
             {({
               values,
@@ -82,9 +98,6 @@ const LoginEmail = () => {
                   className="bg-blue-500 text-white rounded-full mt-6 py-2 px-4 disabled:bg-gray-300 disabled:cursor-not-allowed"
                   type="submit"
                   disabled={isSubmitting}
-                  onClick={() => {
-                    navigate("/loginpass");
-                  }}
                 >
                   Log In
                 </button>

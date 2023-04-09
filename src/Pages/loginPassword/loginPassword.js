@@ -4,6 +4,7 @@ import { Field, Formik } from "formik";
 import { MdError } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const PasswordInput = ({ field, form, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -71,8 +72,23 @@ export const KeepSignin = () => {
   );
 };
 
-const LoginPass = () => {
+const LoginPass = ({ email }) => {
   const navigate = useNavigate();
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3333/customer/signin",
+        {
+          email,
+          password: values.password,
+        }
+      );
+      console.log(response.data);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className="mx-auto ">
@@ -94,12 +110,7 @@ const LoginPass = () => {
               }
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                // alert(JSON.stringify(values, null, 2));
-                // setSubmitting(false);
-              }, 400);
-            }}
+            onSubmit={handleSubmit}
           >
             {({
               values,
@@ -113,7 +124,7 @@ const LoginPass = () => {
               <form onSubmit={handleSubmit}>
                 <div className="form-group my-5">
                   <p className="text-sm">Email Address</p>
-                  <span className="mr-3">ahmed.janady13@gmail.com</span>
+                  <span className="mr-3">{email}</span>
                   <Link
                     className="changeEmail underline  text-slate-400 text-sm"
                     to="/login"
@@ -152,9 +163,6 @@ const LoginPass = () => {
                   className="bg-blue-500 text-white rounded-full py-2 px-4 disabled:bg-gray-300 disabled:cursor-not-allowed w-full mt-6"
                   type="submit"
                   disabled={isSubmitting}
-                  onClick={() => {
-                    navigate("/account");
-                  }}
                 >
                   Sign In
                 </button>
