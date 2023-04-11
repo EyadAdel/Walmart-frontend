@@ -1,66 +1,69 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode } from "swiper";
-import "swiper/css";
-import "swiper/css/free-mode";
-import Card from "../Card/Card";
-// import img1 from "../../assets/product1.webp";
-// import img2 from "../../assets/product2.webp";
-// import img3 from "../../assets/product3.webp";
-// import img4 from "../../assets/product4.webp";
-// import img5 from "../../assets/product5.webp";
-// import img6 from "../../assets/product6.webp";
-// import img7 from "../../assets/product7.webp";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import getProducts from "../../store/actions/action";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 6,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 function MainSlider() {
+  const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.getAllProducts);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  });
+
   return (
-    <div className="container p-4 justify-center ">
-      <Swiper
-        freeMode={true}
-        grabCursor={true}
-        modules={[FreeMode]}
-        className="mySwiper"
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 6,
-            spaceBetween: 10,
-          },
-        }}
-      >
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card />
-        </SwiperSlide>
-      </Swiper>
-    </div>
+    <>
+      <div className="container p-4 justify-center">
+        <Carousel responsive={responsive}>
+          {products.map(function (product) {
+            return (
+              <div className="flex justify-center">
+                <div className="block w-52  bg-white dark:bg-neutral-700">
+                  <img
+                    className="cursor-pointer"
+                    src={product.photos[0]}
+                    alt=""
+                  />
+                  <div className="p-6">
+                    <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                      ${product.priceAfter}
+                    </h5>
+                    <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                      {product.brand}
+                    </p>
+                    <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow">
+                      Option
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
+    </>
   );
 }
 
