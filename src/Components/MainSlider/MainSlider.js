@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getProducts from "../../store/actions/action";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -41,6 +42,7 @@ function MainSlider() {
             return (
               <div className="flex justify-center">
                 <div className="block w-52  bg-white dark:bg-neutral-700">
+                
                   <img
                     className="cursor-pointer"
                     src={product.photos[0]}
@@ -53,11 +55,15 @@ function MainSlider() {
                     <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                       {product.brand}
                     </p>
+                    <Link to={`/details/${product._id}`}>
                     <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow">
                       Option
                     </button>
+                    </Link>
                   </div>
+                  
                 </div>
+                
               </div>
             );
           })}

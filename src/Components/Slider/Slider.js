@@ -4,6 +4,7 @@ import getProducts from "../../store/actions/action";
 import Card from "../Card/Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -37,10 +38,14 @@ function Slider() {
   return (
     <div className="container p-4 justify-center ">
       <Carousel responsive={responsive}>
+      
         {products.map(function (product) {
+          
           return (
             <div className="flex justify-center">
+              
               <div className="block w-52  bg-white dark:bg-neutral-700">
+              <Link to={`/details/${product._id}`}>
                 <img
                   className="cursor-pointer"
                   src={product.photos[0]}
@@ -57,10 +62,13 @@ function Slider() {
                     Option
                   </button>
                 </div>
+                </Link>
               </div>
+              
             </div>
           );
         })}
+        
       </Carousel>
     </div>
   );
