@@ -74,7 +74,12 @@ function Navbar() {
               <h5 className="text-base">Account</h5>
             </div>
           </div>
-          <div className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer">
+          <div
+            onClick={() => {
+              navigate("/order");
+            }}
+            className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
+          >
             <CgShoppingCart />
             <p className="text-xs">$0.00</p>
             <p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">

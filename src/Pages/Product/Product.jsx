@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
-import axiosInstance from '../../axiosConfig/axiosConfig';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../axiosConfig/axiosConfig";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./Product.css";
 import { Accordion } from "flowbite-react";
@@ -9,8 +9,7 @@ import Footer from "../../Components/Footer/Footer";
 import { Progress } from "flowbite-react";
 import { MdChatBubbleOutline } from "react-icons/md";
 import { AiFillStar } from "react-icons/ai";
-import { AiOutlineStar } from "react-icons/ai";
-import { Card } from "flowbite-react";
+// import { AiOutlineStar } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { BsShop } from "react-icons/bs";
@@ -18,19 +17,19 @@ import { SlPresent } from "react-icons/sl";
 
 function Product() {
   const [zoomStyle, setZoomStyle] = useState({});
-  const [product, setProducts] = useState({})
-  const [reviews,setReviews] = useState({})
-    let { id } = useParams();
-    async function getProductDetails(){
-        let {data} = await axiosInstance.get(`/product/${id}`);
-        // console.log(data);
-        setProducts(data);
-    }
-    async function getReviewDetails(){
-      let {data} = await axiosInstance.get(`/reviews/product/${id}`)
-      console.log(data);
-      setReviews(data)
-    }
+  const [product, setProducts] = useState({});
+  const [reviews, setReviews] = useState({});
+  let { id } = useParams();
+  async function getProductDetails() {
+    let { data } = await axiosInstance.get(`/product/${id}`);
+    // console.log(data);
+    setProducts(data);
+  }
+  async function getReviewDetails() {
+    let { data } = await axiosInstance.get(`/reviews/product/${id}`);
+    console.log(data);
+    setReviews(data);
+  }
   const [displayedImgSrc, setDisplayedImgSrc] = useState(product.mainPhoto);
   const [hoveredImgSrc, setHoveredImgSrc] = useState("");
 
@@ -58,18 +57,19 @@ function Product() {
   const handleImageLeave = () => {
     setHoveredImgSrc("");
   };
-  useEffect(()=>{
+
+  useEffect(() => {
     getProductDetails();
     getReviewDetails();
-} , [])
+  }, []);
 
   return (
     <>
       <Navbar />
-      <main className="container mx-auto  py-6">
+      <main className="container py-6">
         <section className="flex">
           {/* Left */}
-          <section className="w-2/3">
+          <section className="w-3/4">
             <section>
               <div className="">
                 <nav aria-label="breadcrumb" className="">
@@ -119,7 +119,7 @@ function Product() {
                   <p className="flex text-sm">
                     <strong>Ship free, no order min*</strong>
                     <span>As often as you need.</span>
-                    <a href="#" className="ml-2 underline cursor-pointer">
+                    <a href="/" className="ml-2 underline cursor-pointer">
                       Learn more
                     </a>
                   </p>
@@ -469,7 +469,9 @@ function Product() {
                                   <AiFillStar />
                                   <AiFillStar />
                                   <a href="#fgfdg">
-                                    <p className="underline">({reviews.rating} reviews)</p>
+                                    <p className="underline">
+                                      ({reviews.rating} reviews)
+                                    </p>
                                   </a>
                                 </span>
                                 <div className="pt-2 flex ">
@@ -525,7 +527,6 @@ function Product() {
                                       );
                                     })} */}
                                   </div>
-                                
                                 </div>
                               </div>
                             </div>
@@ -608,7 +609,7 @@ function Product() {
           </section>
 
           {/* Right  */}
-          <div className="1/3">
+          <div className="w-1/4">
             <div id="shopping" className="pl-4 pr-8 py-2">
               <div className="flex justify-between  mt-4">
                 <p className=" text-sm">
@@ -654,7 +655,6 @@ function Product() {
                   <span>
                     <AiFillStar />
                   </span>
-                
                 </span>
                 <span className="pl-1">{reviews.rating}</span>
                 <a className="underline pl-1" href="#klmk">
@@ -676,7 +676,7 @@ function Product() {
               <div className="pl-2 py-2 flex">
                 <div className="pl-4">
                   <button
-                    className="addToCart_btn border fw-semibold py-2 px-3 fs-6 border-2 rounded-full"
+                    className="addToCart_btn  fw-semibold py-2 px-3 fs-6 border-2 rounded-full"
                     type="button"
                     aria-live="polite"
                     data-testid="buy-now-wrapper"
