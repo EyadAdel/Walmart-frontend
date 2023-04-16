@@ -96,7 +96,7 @@ const Signup = ({ email }) => {
   const handleSubmit = async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:3333/customer/signup",
+        "http://localhost:5000/customer/signup",
         {
           email,
           password: values.password,

@@ -10,7 +10,7 @@ const LoginEmail = ({ setEmail }) => {
   const handleSubmit = async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:3333/customer/login",
+        "http://localhost:5000/customer/login",
         {
           email: values.email,
         }
