@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Field, Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdError } from "react-icons/md";
 import { HiCheck } from "react-icons/hi";
 import { HiXMark } from "react-icons/hi2";
+import axios from "axios";
 
 const PasswordInput = ({ field, form, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -90,7 +91,25 @@ const PasswordInput = ({ field, form, ...props }) => {
   );
 };
 
-const Signup = () => {
+const Signup = ({ email }) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/customer/signup",
+        {
+          email,
+          password: values.password,
+          firstName: values.firstName,
+          lastName: values.lastName,
+        }
+      );
+      console.log(response.data);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="mx-auto">
       <div className="mx-auto w-96">
@@ -132,12 +151,7 @@ const Signup = () => {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              // alert(JSON.stringify(values, null, 2));
-              // setSubmitting(false);
-            }, 400);
-          }}
+          onSubmit={handleSubmit}
         >
           {({
             values,
@@ -151,7 +165,7 @@ const Signup = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group my-5">
                 <p className="text-sm font-semibold">Email Address</p>
-                <span className="mr-3">ahmed.janady13@gmail.com</span>
+                <span className="mr-3">{email}</span>
                 <Link
                   className="changeEmail underline  text-slate-400 text-sm"
                   to="/login"
