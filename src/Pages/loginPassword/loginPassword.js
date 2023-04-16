@@ -17,11 +17,10 @@ export const PasswordInput = ({ field, form, ...props }) => {
         {props.label}
       </label>
       <div
-        className={`input-group outline outline-offset-1 outline-1 flex rounded mt-2 ${
-          form.touched[field.name] && form.errors[field.name]
-            ? "outline-rose-500"
-            : ""
-        }`}
+        className={`input-group outline outline-offset-1 outline-1 flex rounded mt-2 ${form.touched[field.name] && form.errors[field.name]
+          ? "outline-rose-500"
+          : ""
+          }`}
       >
         <input
           type={showPassword ? "text" : "password"}
@@ -73,6 +72,21 @@ export const KeepSignin = () => {
 };
 
 const LoginPass = ({ email }) => {
+
+  //Error Message if password is Incorrect
+  const [showError, setShowError] = useState('');
+  const handleClick = () => {
+    setTimeout(() => {
+      setShowError('Your password and email do not match. Please try again or Reset your password.');
+    }, 0)
+  }
+
+  //Keep me sign in checkbox
+  const [signIn, setSignIn] = useState(false);
+  const handleKeepMeSignInChange = (event) => {
+    setSignIn(event.target.checked);
+  };
+
   const navigate = useNavigate();
   const handleSubmit = async (values) => {
     try {
@@ -83,8 +97,14 @@ const LoginPass = ({ email }) => {
           password: values.password,
         }
       );
-      console.log(response.data);
-      navigate("/");
+      // console.log(response.data);
+      if (response.data) {
+        localStorage.setItem('Email',email);
+        localStorage.setItem('SignedIn', signIn)
+        navigate("/");
+      } else {
+        handleClick();
+      }
     } catch (error) {
       console.error(error);
     }
@@ -98,6 +118,13 @@ const LoginPass = ({ email }) => {
             className="img-fluid rounded-5 h-16 mx-auto"
             alt=""
           />
+          {showError &&
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <span class="block sm:inline">{showError}</span>
+              <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.707 10l4.147-4.146a.5.5 0 10-.708-.708L10 9.293 5.854 5.146a.5.5 0 00-.708.708L9.293 10l-4.147 4.146a.5.5 0 10.708.708L10 10.707l4.146 4.147a.5.5 0 00.708-.708L10.707 10z" /></svg>
+              </span>
+            </div>}
           <h5 className="text-center font-bold w-3/4 mx-auto mb-4">
             Welcome back!
           </h5>
@@ -153,19 +180,23 @@ const LoginPass = ({ email }) => {
                     id="keepSignin"
                     className="mr-2 leading-tight"
                     type="checkbox"
+                    checked={signIn}
+                    onChange={handleKeepMeSignInChange}
                   />
                   <label htmlFor="keepSignin" className="text-sm font-bold">
                     Keep me signed in
                   </label>
                 </div>
                 <KeepSignin />
-                <button
-                  className="bg-blue-500 text-white rounded-full py-2 px-4 disabled:bg-gray-300 disabled:cursor-not-allowed w-full mt-6"
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  Sign In
-                </button>
+                <div>
+                  <button
+                    className="bg-blue-500 text-white rounded-full py-2 px-4 disabled:bg-gray-300 disabled:cursor-not-allowed w-full mt-6"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Sign In
+                  </button>
+                </div>
               </form>
             )}
           </Formik>
