@@ -1,0 +1,6 @@
+.walmart{
+    background-image: url("//i5.walmartimages.com/dfw/63fd9f59-2560/180cbd0f-3bb8-421c-b0f1-13bfe51861a1/v1/wplus_right-bottom_banner.svg");
+    background-image: url("//i5.walmartimages.com/dfw/63fd9f59-2560/180cbd0f-3bb8-421c-b0f1-13bfe51861a1/v1/wplus_right-bottom_banner.svg"), url("//i5.walmartimages.com/dfw/63fd9f59-2560/180cbd0f-3bb8-421c-b0f1-13bfe51861a1/v1/wplus_top_left_banner.svg");
+    background-repeat: no-repeat;
+    background-position: right bottom,left top;
+}

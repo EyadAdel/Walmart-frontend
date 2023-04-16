@@ -1,5 +1,4 @@
 import React from "react";
-import img1 from "../../assets/product1.webp";
 import { useNavigate } from "react-router-dom";
 function Card() {
   const navigate = useNavigate();
@@ -10,7 +9,7 @@ function Card() {
         navigate("/cameraProduct");
       }}
     >
-      <div className="block w-52  bg-white dark:bg-neutral-700">
+      {/* <div className="block w-52  bg-white dark:bg-neutral-700">
         <img className="cursor-pointer" src={img1} alt="" />
         <div className="p-6">
           <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
@@ -23,7 +22,7 @@ function Card() {
             Option
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
