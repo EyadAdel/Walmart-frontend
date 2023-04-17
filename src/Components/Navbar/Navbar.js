@@ -11,6 +11,9 @@ import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import {BsBoxArrowDown} from "react-icons/bs";
+import {GiPresent} from "react-icons/gi"
+
 
 function Navbar() {
   const navigate = useNavigate();
@@ -55,12 +58,54 @@ function Navbar() {
         </div>
         {/* Right */}
         <div className="flex mr-7">
-          <div className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer">
+          <button
+            id="dropdownDefaultButton"
+            data-dropdown-toggle="dropdown"
+            type="button"
+            className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
+          >
             <AiOutlineHeart />
             <div className="">
               <p className="text-xs font-semibold">Reorder</p>
               <h5 className="text-base">My Items</h5>
             </div>
+          </button>
+          <div
+            id="dropdown"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700"
+          >
+            <ul
+              class=" text-center ps-6 py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li className="text-lg flex">
+              <BsBoxArrowDown className=" mt-3"/>
+                <a
+                  href="/reorder"
+                  class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                 Reorder
+                </a>
+              </li>
+              <li className="text-lg flex ">
+                <AiOutlineHeart className=" mt-3"/>
+                <a
+                  href="/lists"
+                  class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  lists
+                </a>
+              </li>
+              <li className="text-lg flex ">
+                <GiPresent className=" mt-3"/>
+                <a
+                  href="/registries"
+                  class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  Registries
+                </a>
+              </li>
+            </ul>
           </div>
           <div className="flex items-center mx-8 gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] px-3 rounded-full cursor-pointer">
             <AiOutlineUser />
