@@ -29,7 +29,6 @@ function MainSlider() {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.getAllProducts);
-
   useEffect(() => {
     dispatch(getProducts());
   });

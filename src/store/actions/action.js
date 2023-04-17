@@ -5,7 +5,7 @@ export default function getProducts(params) {
     return axiosConfig
       .get(`/product`)
       .then((res) => {
-        dispatch({ type: "GET_products", payload: res.data });
+        dispatch({ type: "GET_products", payload: res.data.products });
       })
 
       .catch((err) => {
