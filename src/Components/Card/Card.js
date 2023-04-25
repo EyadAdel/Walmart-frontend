@@ -6,7 +6,7 @@ function Card() {
     <div
       className="flex justify-center"
       onClick={() => {
-        navigate("/cameraProduct");
+        navigate("/order");
       }}
     >
       {/* <div className="block w-52  bg-white dark:bg-neutral-700">

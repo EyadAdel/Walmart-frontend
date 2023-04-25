@@ -6,6 +6,6 @@ import { applyMiddleware } from "redux";
 
 import thunk from "redux-thunk";
 
-const store = createStore(getProducts, applyMiddleware(thunk));
 
+const store = createStore(getProducts, applyMiddleware(thunk));
 export default store;

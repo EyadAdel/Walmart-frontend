@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../axiosConfig/axiosConfig";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./Product.css";
@@ -14,15 +14,22 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { BsShop } from "react-icons/bs";
 import { SlPresent } from "react-icons/sl";
+import Services from "../../Services/Services";
+import { useDispatch, useSelector } from "react-redux";
+import cartItems from "../../store/actions/card";
 
 function Product() {
+  const navigate = useNavigate();
   const [zoomStyle, setZoomStyle] = useState({});
   const [product, setProducts] = useState({});
-  const [reviews, setReviews] = useState({});
+  const [reviews, setReviews] = useState([]);
   let { id } = useParams();
+  let dispatch = useDispatch();
+  let prod = useSelector((state)=>state.cartItems);
+  console.log(prod);
   async function getProductDetails() {
     let { data } = await axiosInstance.get(`/product/${id}`);
-    // console.log(data);
+    console.log(data);
     setProducts(data);
   }
   async function getReviewDetails() {
@@ -682,7 +689,14 @@ function Product() {
                     data-testid="buy-now-wrapper"
                     id=""
                   >
-                    <span aria-hidden="true" className="p-2">
+                    <span aria-hidden="true" className="p-2" 
+                    onClick={() => {
+                      // navigate("/order");
+                      Services(product);
+                      
+                      dispatch(cartItems())
+                      console.log(prod);
+                    }}>
                       Add to cart
                     </span>
                   </button>

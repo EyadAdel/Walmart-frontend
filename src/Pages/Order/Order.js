@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { IoIosArrowDown, IoIosArrowUp ,IoMdClose} from "react-icons/io";
 import { TbTruck } from 'react-icons/tb';
 import { AiOutlinePlus , AiOutlineMinus } from 'react-icons/ai'
@@ -6,15 +6,31 @@ import { Accordion } from "flowbite-react";
 
 import "./Order.css"
 import Navbar from "../../Components/Navbar/Navbar";
+import { addMoreThanProduct, minusProduct, removeItems } from "../../Services/Services";
+import { useDispatch, useSelector } from "react-redux";
+import cartItems from "../../store/actions/card";
+import { useNavigate } from "react-router-dom";
+
 
 function Order() {
+    const navigate = useNavigate()
     const [elementsVisible,setElementsVisible] = useState(true)
+    let cartItemsArray = useSelector((state)=>state.cartItems)
+    
+    console.log(cartItemsArray);
+    let dispatch = useDispatch();
     function handleCloseClick(){
         setElementsVisible(false);
     }
+  useEffect(() => {
+    if(cartItemsArray==null){
+        navigate("/");
+    }
+    
+  });
   return <>
         <Navbar/>
-        <h1 className="font-bold text-xl mx-10 py-4">Cart (1 item)</h1>
+        <h1 className="font-bold text-xl mx-10 py-4">Cart ({cartItemsArray?.length} item)</h1>
         <div className="cart_head mx-10 flex gap-4">
             
             <div className="w-2/3">
@@ -65,38 +81,50 @@ function Order() {
                         </div>
                     </div>
                     <hr className="my-4 mx-3"/>
-                    <div className="p-3 ">
+                    {
+                    cartItemsArray==null?"":
+                    cartItemsArray.map((item)=><div className="p-3 ">
                         <span className="font-bold text-blue-600 text-sm pr-2">In 200+ people's carts</span>
-                        <span className="text-sm border-1 border-blue-600 text-blue-600 p-1">Best seller</span>
+                        <span className="text-sm border-1 border-blue-600 text-blue-600 p-1">{item.badges[0]}</span>
                         <div className="flex justify-between gap-5">
                             <div className="flex gap-3 items-center p-2 w-1/2">
-                                <img src="https://i5.walmartimages.com/asr/9cf411b5-f1d1-416b-a5d5-9f12338310a8.083c0002fe22d7e799957697c3c64060.jpeg?odnHeight=96&odnWidth=96&odnBg=FFFFFF" alt=""/>
+                                <img src={item.mainPhoto} width="80rem" height="80rem" alt=""/>
                                 <div className="flex flex-col">
-                                    <span>Fujifilm Instax Mini Twin Film Pack (20 Photos)</span>
-                                    <p className="my-2">$13.98/ea</p>
+                                    <span>{item.name}</span>
+                                    <p className="my-2">${item.priceAfter}</p>
                                     <div className="flex gap-2">
-                                        <img src="//i5.walmartimages.com/dfw/63fd9f59-e685/7e6c8c3a-3ba7-437a-a066-de3ad3a6a15a/v1/roundReturn.svg"/>
                                         <p>Free 90-day returns</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col justify-between w-1/2">
                                 <div className="text-end font-bold">
-                                    $13.98
+                                    ${item.priceAfter}
                                 </div>    
                                 <div className="flex justify-between">
-                                    <p className="underline">Remove</p>
+                                    <p className="underline cursor-pointer"
+                                    onClick={()=>{removeItems(item._id)
+                                        dispatch(cartItems())
+                                    }}
+                                    >Remove</p>
                                     <p className="underline">save for later</p>
-                                    <div className="flex items-center border rounded-full gap-3 px-3 py-1">
-                                        <AiOutlineMinus/>
-                                        <p>1</p>
-                                        <AiOutlinePlus/>
+                                    <div className="flex items-center border rounded-full gap-x-5 px-3 py-1">
+                                        <AiOutlineMinus className="cursor-pointer hover:bg-gray-300 rounded-lg "
+                                        onClick={()=>{minusProduct(item)
+                                            dispatch(cartItems())
+                                        }}/>
+                                        <p>{item.quantity}</p>
+                                        <AiOutlinePlus className="cursor-pointer hover:bg-gray-300 rounded-lg"
+                                        onClick={()=>{addMoreThanProduct(item)
+                                            dispatch(cartItems())
+                                        }}/>
                                     </div>
                                 </div>
                                 
                             </div>
                         </div>
-                    </div>
+                    </div>)}
+                    
                 </div>    
                 <div className="max-w-xlg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-14 p-3">
                     <p className="font-bold text-lg my-2">Recommended with your order</p>
