@@ -1,5 +1,6 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import logo from "../../assets/logo.png";
+import { useSelector } from "react-redux";
 import headerLogo from "../../assets/header-img.png";
 import { TiThLargeOutline } from "react-icons/ti";
 import { TiPointOfInterest } from "react-icons/ti";
@@ -11,12 +12,20 @@ import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+
+
+import { countTotalPrice } from "../../Services/Services";
+
 import {BsBoxArrowDown} from "react-icons/bs";
 import {GiPresent} from "react-icons/gi"
 
 
+
 function Navbar() {
   const navigate = useNavigate();
+  let prod = useSelector((state)=>state.cartItems);
+  let [totalPrice , Quantity] = countTotalPrice(prod)
+
   return (
     <div className="bg-[#017cc2] sticky top-0  z-10">
       <div className=" text-white flex items-center justify-between">
@@ -126,9 +135,9 @@ function Navbar() {
             className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <CgShoppingCart />
-            <p className="text-xs">$0.00</p>
+            <p className="text-xs">{totalPrice}</p>
             <p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
-              0
+              {Quantity}
             </p>
           </div>
         </div>

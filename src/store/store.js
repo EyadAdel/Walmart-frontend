@@ -5,9 +5,12 @@ import { applyMiddleware } from "redux";
 
 import thunk from "redux-thunk";
 
+
+
 const store = createStore(
   getProducts,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
 export default store;
+
