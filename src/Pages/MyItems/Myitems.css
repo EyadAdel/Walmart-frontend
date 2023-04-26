@@ -1,0 +1,8 @@
+.myitems_list:hover{
+    background-color: #EDEDED;
+    border-bottom: 4px solid #B5B5B5;
+}
+
+.active-link:after {
+    border-bottom: 2px solid blue;
+  }

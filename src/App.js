@@ -10,6 +10,10 @@ import Product from "./Pages/Product/Product";
 import { useState } from "react";
 
 import Order from "./Pages/Order/Order";
+import Reorder from "./Pages/MyItems/Reorder";
+import Lists from "./Pages/MyItems/Lists";
+import Registeres from "./Pages/MyItems/Registeres";
+import CustomerList from "./Pages/MyItems/CustomerList";
 
 
 
@@ -26,6 +30,10 @@ function App() {
         <Route path="/electronics" element={<Electronics />} />
         <Route path="/order" element={<Order/>}/>
         <Route path="/details/:id" element={<Product />} />
+        <Route path="/reorder" element={<Reorder/>} />
+        <Route path="/lists" element={<Lists/>} />
+        <Route path="/registries" element={<Registeres/>} />
+        <Route path="/customerlist" element={<CustomerList/>} />
       </Routes>
     </div>
   );
