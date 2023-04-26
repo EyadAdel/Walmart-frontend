@@ -97,10 +97,11 @@ const LoginPass = ({ email }) => {
           password: values.password,
         }
       );
-      // console.log(response.data);
+      console.log(response.data);
       if (response.data) {
         localStorage.setItem('Email',email);
         localStorage.setItem('SignedIn', signIn)
+        localStorage.setItem('Token',response.data.token)
         navigate("/");
       } else {
         handleClick();
