@@ -90,7 +90,7 @@ function Order() {
                             <div className="flex gap-3 items-center p-2 w-1/2">
                                 <img src={item.mainPhoto} width="80rem" height="80rem" alt=""/>
                                 <div className="flex flex-col">
-                                    <span>{item.name}</span>
+                                    <span>{item.name.en}</span>
                                     <p className="my-2">${item.priceAfter}</p>
                                     <div className="flex gap-2">
                                         <p>Free 90-day returns</p>

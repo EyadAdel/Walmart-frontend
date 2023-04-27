@@ -197,7 +197,7 @@ function Product() {
                         <Accordion.Content>
                           <div id="h-96 " className="font-sm">
                             <p className="font-semibold my-2">
-                              {product.productDetails}
+                              {product.productDetails.en}
                             </p>
                             <div className=" flex gap-x-2 my-2 h-12 items-start ">
                               <span className="">
@@ -609,13 +609,13 @@ function Product() {
                   class="bg-transparent bn lh-solid pa0 sans-serif tc underline inline-button fs-6"
                   href="/c/brand/canon"
                 >
-                   {product.brand}
+                   {product.brand.en}
                 </a>
                 <h5
                   class="font-semibold dark-gray my-2 text-[20px]"
                   itemprop="name"
                 >
-                  {product.name}
+                  {product.name.en}
                 </h5>
               </div>
 
