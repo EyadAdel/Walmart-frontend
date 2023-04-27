@@ -48,7 +48,7 @@ function Slider() {
               <Link to={`/details/${product._id}`}>
                 <img
                   className="cursor-pointer"
-                  src={product.photos[0]}
+                  src={product.mainPhoto}
                   alt=""
                 />
                 <div className="p-6">
@@ -56,7 +56,7 @@ function Slider() {
                     ${product.priceAfter}
                   </h5>
                   <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    {product.brand}
+                    {product.brand.en}
                   </p>
                   <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow">
                     Option

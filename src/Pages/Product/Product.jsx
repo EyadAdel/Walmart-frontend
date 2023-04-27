@@ -73,6 +73,7 @@ function Product() {
   useEffect(() => {
     getProductDetails();
     getReviewDetails();
+    console.log(product);
   }, []);
 
   // const favorites = useSelector((state) => state.favorites.fav);
@@ -476,7 +477,7 @@ function Product() {
                             <AiFillStar />
                             <AiFillStar />
                             <a href="#fgfdg">
-                              <p className="underline">(193 reviews)</p>
+                              <p className="underline">({reviews.length} reviews)</p>
                             </a>
                           </span>
                           <div className="pt-2 flex ">
@@ -638,7 +639,7 @@ function Product() {
                 </span>
                 <span className="pl-1">(5)</span>
                 <a className="underline pl-1" href="#klmk">
-                  193 reviews
+                  {reviews.length} reviews
                 </a>
               </div>
               <div className="py-2 px-3">

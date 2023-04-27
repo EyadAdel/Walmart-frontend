@@ -26,7 +26,7 @@ function Order() {
     if(cartItemsArray==null){
         navigate("/");
     }
-    
+    console.log(cartItemsArray);
   });
   return <>
         <Navbar/>
