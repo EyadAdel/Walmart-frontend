@@ -1,11 +1,30 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Form, Field} from "formik";
 import "./form.css";
 import { MdError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
+
+const initialValues= {
+  email: ''
+}
+const validate = values => {
+  const errors = {};
+              if (!values.email) {
+                errors.email = "Email address is required.";
+              } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+              ) {
+                errors.email = "Please enter a valid email address.";
+              }
+
+              return errors;
+}
+
 const LoginEmail = ({ setEmail }) => {
+
   const navigate = useNavigate();
   const handleSubmit = async (values) => {
     try {
@@ -27,6 +46,7 @@ const LoginEmail = ({ setEmail }) => {
       console.error(error);
     }
   };
+
   return (
     <>
       <div className="mx-auto ">
@@ -40,32 +60,16 @@ const LoginEmail = ({ setEmail }) => {
             Enter your email to sign in or create an account
           </h5>
           <Formik
-            initialValues={{ email: "" }}
-            validate={(values) => {
-              const errors = {};
-              if (!values.email) {
-                errors.email = "Email address is required.";
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = "Please enter a valid email address.";
-              }
-
-              return errors;
-            }}
+            initialValues={initialValues}
+            validate={validate}
             onSubmit={handleSubmit}
           >
             {({
-              values,
               errors,
               touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
               isSubmitting,
-              /* and other goodies */
             }) => (
-              <form onSubmit={handleSubmit} className="flex flex-col">
+              <Form className="flex flex-col">
                 <label
                   htmlFor="exampleInputEmail1"
                   className="text-gray-600 font-medium mb-2"
@@ -73,12 +77,9 @@ const LoginEmail = ({ setEmail }) => {
                   Email Address
                 </label>
                 <div className="flex ">
-                  <input
+                  <Field
                     type="email"
                     name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
                     className={`grow outline outline-offset-1 outline-1 outline-gray-300 focus:ring  bg-transparent outline-0 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm p-3 ${
                       errors.email && touched.email ? "outline-red-500" : ""
                     }`}
@@ -99,9 +100,9 @@ const LoginEmail = ({ setEmail }) => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Log In
+                  Continue
                 </button>
-              </form>
+              </Form>
             )}
           </Formik>
         </div>
