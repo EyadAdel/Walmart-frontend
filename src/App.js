@@ -19,10 +19,11 @@ import CustomerList from "./Pages/MyItems/CustomerList";
 
 function App() {
   const [email, setEmail] = useState("");
+  const SignedIn = localStorage.getItem("SignedIn")
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={SignedIn === "true" ? <Account /> : <Home />} />
         <Route path="/login" element={<LoginEmail setEmail={setEmail} />} />
         <Route path="/loginpass" element={<LoginPassword email={email} />} />
         <Route path="/signup" element={<Signup email={email} />} />
