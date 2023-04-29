@@ -105,7 +105,10 @@ const Signup = ({ email }) => {
         }
       );
       console.log(response.data);
-      navigate("/");
+      if (response.data) {
+        localStorage.setItem('CustomerDetails', JSON.stringify(response.data.customer))
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
     }
