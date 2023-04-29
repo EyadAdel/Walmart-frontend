@@ -99,9 +99,9 @@ const LoginPass = ({ email }) => {
       );
       console.log(response.data);
       if (response.data) {
-        localStorage.setItem('Email',email);
         localStorage.setItem('SignedIn', signIn)
         localStorage.setItem('Token',response.data.token)
+        localStorage.setItem('UserDetails', JSON.stringify(response.data.customer))
         navigate("/");
       } else {
         handleClick();
