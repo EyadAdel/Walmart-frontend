@@ -48,7 +48,7 @@ function Slider() {
               <Link to={`/details/${product._id}`}>
                 <img
                   className="cursor-pointer"
-                  src={product.photos[0]}
+                  src={product.mainPhoto}
                   alt=""
                 />
                 <div className="p-6">

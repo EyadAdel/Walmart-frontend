@@ -44,7 +44,7 @@ function MainSlider() {
                 
                   <img
                     className="cursor-pointer"
-                    src={product.photos[0]}
+                    src={product.mainPhoto}
                     alt=""
                   />
                   <div className="p-6">
