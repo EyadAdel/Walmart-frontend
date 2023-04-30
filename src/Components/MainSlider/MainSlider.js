@@ -52,7 +52,7 @@ function MainSlider() {
                       ${product.priceAfter}
                     </h5>
                     <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                      {product.brand}
+                      {product.brand.en}
                     </p>
                     <Link to={`/details/${product._id}`}>
                     <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow">

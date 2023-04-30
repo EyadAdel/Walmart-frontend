@@ -594,7 +594,7 @@ function Product() {
               <div className="flex justify-between  mt-4">
                 <p className=" text-sm">
                   <span className="border-solid border-[1px] p-1	rounded-none	text-blue-600 border-blue-600">
-                    Best seller
+                    {product.badges}
                   </span>
                 </p>
                 <span className="flex justify-content-end">

@@ -1,6 +1,7 @@
-import React,{ useEffect } from "react";
+import React,{ useState } from "react";
 import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
+import axiosInstance from "../../axiosConfig/axiosConfig"
 import headerLogo from "../../assets/header-img.png";
 import { TiThLargeOutline } from "react-icons/ti";
 import { TiPointOfInterest } from "react-icons/ti";
@@ -17,15 +18,37 @@ import { useNavigate } from "react-router-dom";
 import { countTotalPrice } from "../../Services/Services";
 
 import {BsBoxArrowDown} from "react-icons/bs";
-import {GiPresent} from "react-icons/gi"
+import {GiPresent} from "react-icons/gi";
+import "./Navbar.css"
 
 
 
 function Navbar() {
+  const [query, setQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   const navigate = useNavigate();
   let prod = useSelector((state)=>state.cartItems);
   let [totalPrice , Quantity] = countTotalPrice(prod)
 
+const handleInputChange = (event) => {
+    setQuery(event.target.value);
+    console.log(query);
+    handleSubmit();
+  };
+
+  const handleSubmit = async () => {
+    
+    let { data } = await axiosInstance.get(`/product?q=${query}`);
+    let results = data.products;
+    for(var i=0 ; i<results.length ; i++){
+      if(results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true){
+          setSearchResults([results[i]])
+          console.log(searchResults);
+      }
+  }
+    // setSearchResults(data.products);
+  };
   return (
     <div className="bg-[#017cc2] sticky top-0  z-10">
       <div className=" text-white flex items-center justify-between">
@@ -60,10 +83,17 @@ function Navbar() {
             type="search"
             className="rounded-full py-1.5  text-black w-full pl-3 focus:rounded-none outline-1"
             placeholder="Search everything at Walmart online and in store"
+            onChange={(event)=>{handleInputChange(event)}}
+            value={query}
           />
           <div className="absolute p-1.5 bg-[#ffc220] right-1.5 rounded-full">
             <BsSearch className="text-black" />
           </div>
+          <ul>
+          {searchResults.map((product) => (
+            <li key={product._id} className="firstLi">{product.name?.en}</li>
+          ))}
+          </ul>
         </div>
         {/* Right */}
         <div className="flex mr-7">

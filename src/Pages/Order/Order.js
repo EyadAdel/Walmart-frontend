@@ -85,7 +85,7 @@ function Order() {
                     cartItemsArray==null?"":
                     cartItemsArray.map((item)=><div className="p-3 ">
                         <span className="font-bold text-blue-600 text-sm pr-2">In 200+ people's carts</span>
-                        <span className="text-sm border-1 border-blue-600 text-blue-600 p-1">{item.badges[0]}</span>
+                        <span className="text-sm border-1 border-blue-600 text-blue-600 p-1">{item.badges}</span>
                         <div className="flex justify-between gap-5">
                             <div className="flex gap-3 items-center p-2 w-1/2">
                                 <img src={item.mainPhoto} width="80rem" height="80rem" alt=""/>
