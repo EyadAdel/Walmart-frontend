@@ -75,6 +75,7 @@ function Product() {
   useEffect(() => {
     getProductDetails();
     getReviewDetails();
+    console.log(product);
   }, []);
 
   // const favorites = useSelector((state) => state.favorites.fav);

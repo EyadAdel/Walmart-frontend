@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiReceipt } from "react-icons/bi";
 import { BsWallet2, BsTruckFront, BsBoxArrowInDown } from "react-icons/bs";
@@ -33,8 +33,35 @@ import autocare from "../../assets/AccountPage-Images/autocare center.png";
 import customCake from "../../assets/AccountPage-Images/custom cake.png";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
+import AddAddressForm from "../../Components/addressForm/addressForm";
+import axios from "axios";
 
 function Account() {
+  const customer = JSON.parse(localStorage.getItem("CustomerDetails"));
+
+  const [isAddAddressFormOpen, setIsAddAddressFormOpen] = useState(false);
+
+  const handleAddAddress = async (values) => {
+    try {
+      const token = localStorage.getItem("Token");
+
+      console.log(token);
+      console.log(values);
+      // const address = JSON.stringify(values);
+      const response = await axios.post(
+        "http://localhost:5000/customer/address",
+        values,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      console.log(response.data); // Do something with the response data
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -54,7 +81,9 @@ function Account() {
             {" "}
             {/* Sidebar */}
             <div>
-              <h1 className="font-bold text-2xl mb-2">Hi, nardien</h1>
+              <h1 className="font-bold text-2xl mb-2">
+                Hi, {customer.firstName}
+              </h1>
               <p className="w-64 text-xs mb-2">
                 Thanks for being a Walmart customer for 1 month
               </p>
@@ -315,7 +344,7 @@ function Account() {
                 <div className="border-r">
                   <div className="ml-5 my-5 ">
                     <h2 className="font-bold text-lg">Email Address</h2>
-                    <p>nardeenashraf2014@gmail.com</p>
+                    <p>{customer.email}</p>
                   </div>
                 </div>
                 <div className="my-5 ml-5">
@@ -334,9 +363,22 @@ function Account() {
                     aproximation of delivery times
                   </p>
                 </div>
-                <button class="h-8 mr-5 px-4 py-1 text-sm font-bold rounded-full border border-black hover:border-2">
+                {/* <button class="h-8 mr-5 px-4 py-1 text-sm font-bold rounded-full border border-black hover:border-2">
                   Add an Address
-                </button>
+                </button> */}
+                <div>
+                  <button
+                    onClick={() => setIsAddAddressFormOpen(true)}
+                    class="h-8 mr-5 px-4 py-1 text-sm font-bold rounded-full border border-black hover:border-2"
+                  >
+                    Add an Address
+                  </button>
+                  <AddAddressForm
+                    isOpen={isAddAddressFormOpen}
+                    onClose={() => setIsAddAddressFormOpen(false)}
+                    onSubmit={handleAddAddress}
+                  />
+                </div>
               </div>
             </div>
             {/* lists */}
