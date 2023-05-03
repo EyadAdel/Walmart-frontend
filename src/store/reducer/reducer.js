@@ -1,14 +1,30 @@
+import cartItems from "../actions/card";
+const token = localStorage.getItem('Token');
 const Initial_state = {
   getAllProducts: [],
-  cartItems:JSON.parse(localStorage.getItem("cartItem"))
+  cartItems:(token)?JSON.parse(localStorage.getItem("CustomerDetails")):
+                    JSON.parse(localStorage.getItem("cartItem"))
 };
 
 export default function getProducts(state = Initial_state, action) {
+  console.log(action);
   switch (action.type) {
     case "GET_products":
       return { ...state, getAllProducts: [...action.payload] };
     case "Cart_Items":
-      return {...state, cartItems:[...action.payload]}
+      if (token) {
+        // User has a token, use customerDetails
+        const initialState = {
+          cartItems: JSON.parse(localStorage.getItem('customerDetails'))
+        }
+        return {...state, cartItems:[...action.payload.cart]}
+      } else {
+        // User does not have a token, use cartItems
+        const initialState = {
+          cartItems: JSON.parse(localStorage.getItem('cartItems'))
+        }
+        return {...state, cartItems:[...action.payload]}
+      }
     default:
       return state;
   }
