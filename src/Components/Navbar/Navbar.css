@@ -1,13 +1,18 @@
-.firstLi{
-    background: white;
-    color: black;
-  list-style: none;
-  border-bottom: 1px solid #D8D8D8;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
-  margin: 0;
-  padding: 20px;
-  transition: background 0.2s;
-  display: flex;
-  justify-content: space-between;
-  text-transform: capitalize;
+#SearchResultList {
+  margin-left: 2px;
+  position: absolute;
+  max-width: 60.2em;
+  max-height: 10rem;
+  overflow-y: scroll;
+  width: 450px;
+  background: white;
+}
+.searchListResult {
+  padding: 6px 15px;
+  font-weight: bold;
+  flex: 1 1 auto;
+  color:black
+}
+.searchListResult:hover{
+  background-color: rgb(217, 220, 224);
 }

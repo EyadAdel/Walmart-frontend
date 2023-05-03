@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../axiosConfig/axiosConfig"
@@ -13,47 +13,46 @@ import { IoIosArrowDown } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-
-
+import { NavLink } from "react-router-dom";
 import { countTotalPrice } from "../../Services/Services";
-
-import {BsBoxArrowDown} from "react-icons/bs";
-import {GiPresent} from "react-icons/gi";
+import { BsBoxArrowDown } from "react-icons/bs";
+import { GiPresent } from "react-icons/gi";
 import "./Navbar.css"
+import axiosConfig from "../../axiosConfig/axiosConfig";
+import { input } from "@material-tailwind/react";
 
 
 
 function Navbar() {
-  const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-
+  const [inputdata, setInputData] = useState('')
+  const [searchDataResult, setSearchDataResult] = useState([])
   const navigate = useNavigate();
-  let prod = useSelector((state)=>state.cartItems);
-  let [totalPrice , Quantity] = countTotalPrice(prod)
+  let prod = useSelector((state) => state.cartItems);
+  let [totalPrice, Quantity] = countTotalPrice(prod)
 
-const handleInputChange = (event) => {
-    setQuery(event.target.value);
-    console.log(query);
-    handleSubmit();
-  };
+  const FetchDataSearch = (value) => {
+    axiosConfig.get('/product/all').then((res) => {
+      console.log(res)
+      const ReturnedData = res.data.products.filter((product) => {
+        return (product && product.name.en && product.name.en.toLowerCase().includes(value));
+      })
+      console.log(ReturnedData)
+      setSearchDataResult(ReturnedData)
+    }).catch((err) => {
+      console.log(err);
+    })
 
-  const handleSubmit = async () => {
-    
-    let { data } = await axiosInstance.get(`/product?q=${query}`);
-    let results = data.products;
-    for(var i=0 ; i<results.length ; i++){
-      if(results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true){
-          setSearchResults([results[i]])
-          console.log(searchResults);
-      }
   }
-    // setSearchResults(data.products);
-  };
+  const handleChange = (value) => {
+    console.log(value);
+    setInputData(value);
+    FetchDataSearch(value);
+  }
   return (
-    <div className="bg-[#017cc2] sticky top-0  z-10">
-      <div className=" text-white flex items-center justify-between">
+    <div className="bg-[#017cc2] sticky top-0 z-10">
+      <div className="text-white grid grid-cols-3">
         {/* Left */}
-        <div className="flex items-center gap-x-4">
+        <div className="col-span-1 items-center gap-x-4 flex flex-left">
           <div
             className="cursor-pointer"
             onClick={() => {
@@ -70,33 +69,44 @@ const handleInputChange = (event) => {
             className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <TiThLargeOutline />
-            <p className="">Departments</p>
+            <p>Departments</p>
           </div>
           <div className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer">
             <TiPointOfInterest />
-            <p className="">Services</p>
+            <p>Services</p>
           </div>
         </div>
         {/* Middle */}
-        <div className="relative  flex flex-1 items-center mx-6">
-          <input
-            type="search"
-            className="rounded-full py-1.5  text-black w-full pl-3 focus:rounded-none outline-1"
-            placeholder="Search everything at Walmart online and in store"
-            onChange={(event)=>{handleInputChange(event)}}
-            value={query}
-          />
-          <div className="absolute p-1.5 bg-[#ffc220] right-1.5 rounded-full">
-            <BsSearch className="text-black" />
+        <div className="col-span-1 flex justify-center flex-col">
+          <div className="flex">
+            <input
+              type="search"
+              className="rounded-full text-black w-full focus:rounded-none outline-1 h-auto"
+              placeholder="Search everything at Walmart online and in store"
+              onChange={(e) => { handleChange(e.target.value) }}
+              value={inputdata}
+            />
+            <div className="bg-[#ffc220] rounded-full w-7 h-7 relative right-9 top-2">
+              <BsSearch className="text-black relative top-1 left-1.5" />
+            </div>
           </div>
-          <ul>
-          {searchResults.map((product) => (
-            <li key={product._id} className="firstLi">{product.name?.en}</li>
-          ))}
-          </ul>
+          <div>
+            {inputdata && <div id="SearchResultList">
+              {searchDataResult.map((result) => {
+                return <div className='flex justify-between' onClick={() => { console.log(result.name.en); }}>
+                  <NavLink className='no-underline searchListResult'>
+                    <div key={result._id} className=''>
+                      <span>{result.name.en}</span>
+                    </div>
+                  </NavLink>
+                </div>
+              })}
+            </div> 
+          }
+          </div>
         </div>
         {/* Right */}
-        <div className="flex mr-7">
+        <div className="col-span-1 flex justify-end mr-7">
           <button
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
@@ -118,16 +128,16 @@ const handleInputChange = (event) => {
               aria-labelledby="dropdownDefaultButton"
             >
               <li className="text-lg flex">
-              <BsBoxArrowDown className=" mt-3"/>
+                <BsBoxArrowDown className=" mt-3" />
                 <a
                   href="/reorder"
                   class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                 Reorder
+                  Reorder
                 </a>
               </li>
               <li className="text-lg flex ">
-                <AiOutlineHeart className=" mt-3"/>
+                <AiOutlineHeart className=" mt-3" />
                 <a
                   href="/lists"
                   class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
@@ -136,7 +146,7 @@ const handleInputChange = (event) => {
                 </a>
               </li>
               <li className="text-lg flex ">
-                <GiPresent className=" mt-3"/>
+                <GiPresent className=" mt-3" />
                 <a
                   href="/registries"
                   class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
@@ -164,9 +174,9 @@ const handleInputChange = (event) => {
             }}
             className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
-            <CgShoppingCart />
+            <CgShoppingCart className="mt-5"/>
             <p className="text-xs">{totalPrice}</p>
-            <p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
+            <p className="absolute h-5 w-5 right-2 top-4 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
               {Quantity}
             </p>
           </div>
