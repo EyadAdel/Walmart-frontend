@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import favoritesReducer from './favoritesReducer';
-import getProducts from './reducer';
 import addCustomer from './customerReducer';
+import productsReducer from './productsReducer';
+import cartReducer from './cartReducer';
 
 export default combineReducers({
   // favorites: favoritesReducer,
-  getProducts: getProducts,
-  addCustomer: addCustomer
+  getProducts: productsReducer,
+  addCustomer: addCustomer,
+  cartReducer: cartReducer
 });

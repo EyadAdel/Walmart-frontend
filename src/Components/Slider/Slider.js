@@ -28,8 +28,7 @@ const responsive = {
 
 function Slider() {
   const dispatch = useDispatch();
-
-  const products = useSelector((state) => state.getAllProducts);
+  const products = useSelector((state) => state.getProducts.getAllProducts);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -39,10 +38,10 @@ function Slider() {
     <div className="container p-4 justify-center ">
       <Carousel responsive={responsive}>
       
-        {products.map(function (product) {
+        {products.map(function (product, index) {
           
           return (
-            <div className="flex justify-center">
+            <div className="flex justify-center" key={index}>
               
               <div className="block w-52  bg-white dark:bg-neutral-700">
               <Link to={`/details/${product._id}`}>
