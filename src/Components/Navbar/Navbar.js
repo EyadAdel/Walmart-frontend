@@ -1,7 +1,7 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
-import axiosInstance from "../../axiosConfig/axiosConfig"
+import axiosInstance from "../../axiosConfig/axiosConfig";
 import headerLogo from "../../assets/header-img.png";
 import { TiThLargeOutline } from "react-icons/ti";
 import { TiPointOfInterest } from "react-icons/ti";
@@ -14,57 +14,55 @@ import { CiLocationOn } from "react-icons/ci";
 import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-
 // import { countTotalPrice } from "../../Services/Services";
 
-import {BsBoxArrowDown} from "react-icons/bs";
-import {GiPresent} from "react-icons/gi";
-import "./Navbar.css"
-
-
+import { BsBoxArrowDown } from "react-icons/bs";
+import { GiPresent } from "react-icons/gi";
+import "./Navbar.css";
 
 function Navbar() {
-  const [total,setTotal] = useState(0)
-  const [query, setQuery] = useState('');
+  const [total, setTotal] = useState(0);
+  const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const navigate = useNavigate();
-  let prod = useSelector((state)=>state.cartItems);
+  let prod = useSelector((state) => state.cartItems);
   // console.log(prod.product);
   // let [totalPrice , Quantity] = countTotalPrice(prod)
   console.log(prod);
-  const countTotal = ()=>{
-    let totalPrice =0;
-    prod.cart?.map((prd)=>{
+  const countTotal = () => {
+    let totalPrice = 0;
+    prod.cart?.map((prd) => {
       console.log(prd.product[0].quantity);
-      totalPrice += prd.product?.quantity*prd.product?.priceAfter;
-    })
-    setTotal(totalPrice)
+      totalPrice += prd.product?.quantity * prd.product?.priceAfter;
+    });
+    setTotal(totalPrice);
     console.log(total);
-  }
+  };
   console.log(total);
   useEffect(() => {
     countTotal();
   }, []);
-const handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     setQuery(event.target.value);
     console.log(query);
     handleSubmit();
   };
 
   const handleSubmit = async () => {
-    
     let { data } = await axiosInstance.get(`/product?q=${query}`);
     let results = data.products;
-    for(var i=0 ; i<results.length ; i++){
-      if(results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true){
-          setSearchResults([results[i]])
-          console.log(searchResults);
+    for (var i = 0; i < results.length; i++) {
+      if (
+        results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true
+      ) {
+        setSearchResults([results[i]]);
+        console.log(searchResults);
       }
-  }
+    }
     // setSearchResults(data.products);
   };
-  
+
   return (
     <div className="bg-[#017cc2] sticky top-0  z-10">
       <div className=" text-white flex items-center justify-between">
@@ -99,16 +97,20 @@ const handleInputChange = (event) => {
             type="search"
             className="rounded-full py-1.5  text-black w-full pl-3 focus:rounded-none outline-1"
             placeholder="Search everything at Walmart online and in store"
-            onChange={(event)=>{handleInputChange(event)}}
+            onChange={(event) => {
+              handleInputChange(event);
+            }}
             value={query}
           />
           <div className="absolute p-1.5 bg-[#ffc220] right-1.5 rounded-full">
             <BsSearch className="text-black" />
           </div>
           <ul>
-          {searchResults.map((product) => (
-            <li key={product._id} className="firstLi">{product.name?.en}</li>
-          ))}
+            {searchResults.map((product) => (
+              <li key={product._id} className="firstLi">
+                {product.name?.en}
+              </li>
+            ))}
           </ul>
         </div>
         {/* Right */}
@@ -117,6 +119,9 @@ const handleInputChange = (event) => {
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
             type="button"
+            onClick={() => {
+              navigate("/reorder");
+            }}
             className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <AiOutlineHeart />
@@ -134,16 +139,16 @@ const handleInputChange = (event) => {
               aria-labelledby="dropdownDefaultButton"
             >
               <li className="text-lg flex">
-              <BsBoxArrowDown className=" mt-3"/>
+                <BsBoxArrowDown className=" mt-3" />
                 <a
                   href="/reorder"
                   class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                 Reorder
+                  Reorder
                 </a>
               </li>
               <li className="text-lg flex ">
-                <AiOutlineHeart className=" mt-3"/>
+                <AiOutlineHeart className=" mt-3" />
                 <a
                   href="/lists"
                   class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
@@ -152,7 +157,7 @@ const handleInputChange = (event) => {
                 </a>
               </li>
               <li className="text-lg flex ">
-                <GiPresent className=" mt-3"/>
+                <GiPresent className=" mt-3" />
                 <a
                   href="/registries"
                   class="block px-4 py-2 hover:underline dark:hover:bg-gray-600 dark:hover:text-white"
@@ -170,9 +175,14 @@ const handleInputChange = (event) => {
                 navigate("/login");
               }}
             >
-              {(localStorage.getItem('Token'))?<h5>Hi , {prod?.firstName}</h5>:<div>
-              <p className="text-xs font-semibold">Sign In</p>
-              <h5 className="text-base">Account</h5></div>}
+              {localStorage.getItem("Token") ? (
+                <h5>Hi , {prod?.firstName}</h5>
+              ) : (
+                <div>
+                  <p className="text-xs font-semibold">Sign In</p>
+                  <h5 className="text-base">Account</h5>
+                </div>
+              )}
             </div>
           </div>
           <div
