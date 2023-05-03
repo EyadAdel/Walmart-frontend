@@ -78,7 +78,6 @@ function Account() {
         </div>
         <div className="grid grid-cols-4 ml-20">
           <div className="col-span-1 ml-6">
-            {" "}
             {/* Sidebar */}
             <div>
               <h1 className="font-bold text-2xl mb-2">
@@ -261,7 +260,6 @@ function Account() {
           </div>
 
           <div className="col-span-3 border-l">
-            {" "}
             {/* Right content */}
             <h1 className="font-bold text-3xl px-5">Welcome to you Account</h1>
             {/* Purchase History */}

@@ -188,7 +188,6 @@ const Electronics = () => {
           </div>
         </div>
       </div>
-
       <div className="featured_shops flex ">
         <div className="sideBar flex flex-col w-1/3  p-5 mx-8">
           <h5 className="font-bold text-xl py-5">Featured shops</h5>

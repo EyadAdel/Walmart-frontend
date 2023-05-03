@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
-import axiosInstance from "../../axiosConfig/axiosConfig"
 import headerLogo from "../../assets/header-img.png";
 import { TiThLargeOutline } from "react-icons/ti";
 import { TiPointOfInterest } from "react-icons/ti";
@@ -19,30 +18,31 @@ import { BsBoxArrowDown } from "react-icons/bs";
 import { GiPresent } from "react-icons/gi";
 import "./Navbar.css"
 import axiosConfig from "../../axiosConfig/axiosConfig";
-import { input } from "@material-tailwind/react";
 
 
 
 function Navbar() {
+
+  let prod = useSelector((state) => state.cartItems);
+  let [totalPrice, Quantity] = countTotalPrice(prod)
   const [inputdata, setInputData] = useState('')
   const [searchDataResult, setSearchDataResult] = useState([])
   const navigate = useNavigate();
-  let prod = useSelector((state) => state.cartItems);
-  let [totalPrice, Quantity] = countTotalPrice(prod)
 
   const FetchDataSearch = (value) => {
-    axiosConfig.get('/product/all').then((res) => {
-      console.log(res)
+    axiosConfig.get('/product').then((res) => {
+      //console.log(res)
       const ReturnedData = res.data.products.filter((product) => {
         return (product && product.name.en && product.name.en.toLowerCase().includes(value));
       })
-      console.log(ReturnedData)
+      //console.log(ReturnedData)
       setSearchDataResult(ReturnedData)
     }).catch((err) => {
       console.log(err);
     })
 
   }
+
   const handleChange = (value) => {
     console.log(value);
     setInputData(value);
@@ -87,14 +87,14 @@ function Navbar() {
               value={inputdata}
             />
             <div className="bg-[#ffc220] rounded-full w-7 h-7 relative right-9 top-2">
-              <BsSearch className="text-black relative top-1 left-1.5" />
+              <BsSearch className="text-black relative top-1 left-1.5"/>
             </div>
           </div>
           <div>
             {inputdata && <div id="SearchResultList">
               {searchDataResult.map((result) => {
-                return <div className='flex justify-between' onClick={() => { console.log(result.name.en); }}>
-                  <NavLink className='no-underline searchListResult'>
+                return <div className='flex justify-between'>
+                  <NavLink to={`/search/${result.departmentID}`} className='no-underline searchListResult'>
                     <div key={result._id} className=''>
                       <span>{result.name.en}</span>
                     </div>

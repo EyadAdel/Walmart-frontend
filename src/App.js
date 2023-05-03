@@ -14,6 +14,7 @@ import Reorder from "./Pages/MyItems/Reorder";
 import Lists from "./Pages/MyItems/Lists";
 import Registeres from "./Pages/MyItems/Registeres";
 import CustomerList from "./Pages/MyItems/CustomerList";
+import Search from "./Components/Search/search";
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/electronics" element={<Electronics />} />
         <Route path="/order" element={<Order/>}/>
         <Route path="/details/:id" element={<Product />} />
+        <Route path="/search/:departmentID" element={<Search />} />
         <Route path="/reorder" element={<Reorder/>} />
         <Route path="/lists" element={<Lists/>} />
         <Route path="/registries" element={<Registeres/>} />
