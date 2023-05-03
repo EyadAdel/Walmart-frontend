@@ -31,6 +31,8 @@ function Product() {
   let { id } = useParams();
   let dispatch = useDispatch();
   let prod = useSelector((state)=>state.cartItems);
+  // let prod2 = useSelector((state)=>state.cartItems)
+  // console.log(prod2);
   console.log(prod);
   async function getProductDetails() {
     let { data } = await axiosInstance.get(`/product/${id}`);
@@ -196,7 +198,7 @@ function Product() {
                         <Accordion.Content>
                           <div id="h-96 " className="font-sm">
                             <p className="font-semibold my-2">
-                              {product.productDetails}
+                              {product.productDetails?.en}
                             </p>
                             <div className=" flex gap-x-2 my-2 h-12 items-start ">
                               <span className="">
@@ -476,7 +478,7 @@ function Product() {
                             <AiFillStar />
                             <AiFillStar />
                             <a href="#fgfdg">
-                              <p className="underline">(193 reviews)</p>
+                              <p className="underline">({reviews.length} reviews)</p>
                             </a>
                           </span>
                           <div className="pt-2 flex ">
@@ -594,7 +596,7 @@ function Product() {
               <div className="flex justify-between  mt-4">
                 <p className=" text-sm">
                   <span className="border-solid border-[1px] p-1	rounded-none	text-blue-600 border-blue-600">
-                    {product.badges}
+                    {product.badges?.en[0]}
                   </span>
                 </p>
                 <span className="flex justify-content-end">
@@ -608,13 +610,13 @@ function Product() {
                   class="bg-transparent bn lh-solid pa0 sans-serif tc underline inline-button fs-6"
                   href="/c/brand/canon"
                 >
-                   {product.brand}
+                   {product.brand?.en}
                 </a>
                 <h5
                   class="font-semibold dark-gray my-2 text-[20px]"
                   itemprop="name"
                 >
-                  {product.name}
+                  {product.name?.en}
                 </h5>
               </div>
 
@@ -638,7 +640,7 @@ function Product() {
                 </span>
                 <span className="pl-1">(5)</span>
                 <a className="underline pl-1" href="#klmk">
-                  193 reviews
+                  {reviews.length} reviews
                 </a>
               </div>
               <div className="py-2 px-3">

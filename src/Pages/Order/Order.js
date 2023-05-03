@@ -6,7 +6,7 @@ import { Accordion } from "flowbite-react";
 
 import "./Order.css"
 import Navbar from "../../Components/Navbar/Navbar";
-import { addMoreThanProduct, minusProduct, removeItems } from "../../Services/Services";
+import { addMoreThanProduct, editQuantity, minusProduct, removeItems } from "../../Services/Services";
 import { useDispatch, useSelector } from "react-redux";
 import cartItems from "../../store/actions/card";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ function Order() {
     const [elementsVisible,setElementsVisible] = useState(true)
     let cartItemsArray = useSelector((state)=>state.cartItems)
     
-    console.log(cartItemsArray);
+    console.log(cartItemsArray.cart);
     let dispatch = useDispatch();
     function handleCloseClick(){
         setElementsVisible(false);
@@ -30,7 +30,7 @@ function Order() {
   });
   return <>
         <Navbar/>
-        <h1 className="font-bold text-xl mx-10 py-4">Cart ({cartItemsArray?.length} item)</h1>
+        <h1 className="font-bold text-xl mx-10 py-4">Cart ({cartItemsArray.cart?.length} item)</h1>
         <div className="cart_head mx-10 flex gap-4">
             
             <div className="w-2/3">
@@ -82,16 +82,16 @@ function Order() {
                     </div>
                     <hr className="my-4 mx-3"/>
                     {
-                    cartItemsArray==null?"":
-                    cartItemsArray.map((item)=><div className="p-3 ">
+                    cartItemsArray.cart==null?"":
+                    cartItemsArray.cart?.map((item)=><div className="p-3 ">
                         <span className="font-bold text-blue-600 text-sm pr-2">In 200+ people's carts</span>
                         <span className="text-sm border-1 border-blue-600 text-blue-600 p-1">{item.badges}</span>
                         <div className="flex justify-between gap-5">
                             <div className="flex gap-3 items-center p-2 w-1/2">
-                                <img src={item.mainPhoto} width="80rem" height="80rem" alt=""/>
+                                <img src={item.product?.photos[0]} width="80rem" height="80rem" alt=""/>
                                 <div className="flex flex-col">
-                                    <span>{item.name}</span>
-                                    <p className="my-2">${item.priceAfter}</p>
+                                    <span>{item.product?.name.en}</span>
+                                    <p className="my-2">${item.product?.priceAfter}</p>
                                     <div className="flex gap-2">
                                         <p>Free 90-day returns</p>
                                     </div>
@@ -99,25 +99,28 @@ function Order() {
                             </div>
                             <div className="flex flex-col justify-between w-1/2">
                                 <div className="text-end font-bold">
-                                    ${item.priceAfter}
+                                    ${item.product?.priceAfter*item.quantity}
                                 </div>    
                                 <div className="flex justify-between">
                                     <p className="underline cursor-pointer"
-                                    onClick={()=>{removeItems(item._id)
+                                    onClick={()=>{removeItems(item?._id)
                                         dispatch(cartItems())
                                     }}
                                     >Remove</p>
                                     <p className="underline">save for later</p>
                                     <div className="flex items-center border rounded-full gap-x-5 px-3 py-1">
                                         <AiOutlineMinus className="cursor-pointer hover:bg-gray-300 rounded-lg "
-                                        onClick={()=>{minusProduct(item)
-                                            dispatch(cartItems())
-                                        }}/>
-                                        <p>{item.quantity}</p>
+                                        // onClick={()=>{minusProduct(item)
+                                        //     dispatch(cartItems())
+                                        // }}
+                                        />
+                                        <p><input value={item.quantity} 
+                                        onChange={(event)=>{editQuantity(event.target.value)}}/></p>
                                         <AiOutlinePlus className="cursor-pointer hover:bg-gray-300 rounded-lg"
-                                        onClick={()=>{addMoreThanProduct(item)
-                                            dispatch(cartItems())
-                                        }}/>
+                                        // onClick={()=>{addMoreThanProduct(item)
+                                        //     dispatch(cartItems())
+                                        // }}
+                                        />
                                     </div>
                                 </div>
                                 

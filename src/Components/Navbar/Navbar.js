@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../axiosConfig/axiosConfig"
@@ -15,7 +15,7 @@ import { BiHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 
-import { countTotalPrice } from "../../Services/Services";
+// import { countTotalPrice } from "../../Services/Services";
 
 import {BsBoxArrowDown} from "react-icons/bs";
 import {GiPresent} from "react-icons/gi";
@@ -24,13 +24,28 @@ import "./Navbar.css"
 
 
 function Navbar() {
+  const [total,setTotal] = useState(0)
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const navigate = useNavigate();
   let prod = useSelector((state)=>state.cartItems);
-  let [totalPrice , Quantity] = countTotalPrice(prod)
-
+  // console.log(prod.product);
+  // let [totalPrice , Quantity] = countTotalPrice(prod)
+  console.log(prod);
+  const countTotal = ()=>{
+    let totalPrice =0;
+    prod.cart?.map((prd)=>{
+      console.log(prd.product[0].quantity);
+      totalPrice += prd.product?.quantity*prd.product?.priceAfter;
+    })
+    setTotal(totalPrice)
+    console.log(total);
+  }
+  console.log(total);
+  useEffect(() => {
+    countTotal();
+  }, []);
 const handleInputChange = (event) => {
     setQuery(event.target.value);
     console.log(query);
@@ -49,6 +64,7 @@ const handleInputChange = (event) => {
   }
     // setSearchResults(data.products);
   };
+  
   return (
     <div className="bg-[#017cc2] sticky top-0  z-10">
       <div className=" text-white flex items-center justify-between">
@@ -154,8 +170,9 @@ const handleInputChange = (event) => {
                 navigate("/login");
               }}
             >
+              {(localStorage.getItem('Token'))?<h5>Hi , {prod?.firstName}</h5>:<div>
               <p className="text-xs font-semibold">Sign In</p>
-              <h5 className="text-base">Account</h5>
+              <h5 className="text-base">Account</h5></div>}
             </div>
           </div>
           <div
@@ -165,9 +182,9 @@ const handleInputChange = (event) => {
             className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <CgShoppingCart />
-            <p className="text-xs">{totalPrice}</p>
+            <p className="text-xs">${total}</p>
             <p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
-              {Quantity}
+              {prod.cart?.length}
             </p>
           </div>
         </div>
