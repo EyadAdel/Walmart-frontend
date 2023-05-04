@@ -110,7 +110,7 @@ function Navbar() {
             {inputdata && <div id="SearchResultList">
               {searchDataResult.map((result) => {
                 return <div className='flex justify-between'>
-                  <NavLink to={`/search/${result.departmentID}`} className='no-underline searchListResult'>
+                  <NavLink to={`/search/${result.nestedSubDepartment}`} className='no-underline searchListResult'>
                     <div key={result._id} className=''>
                       <span>{result.name.en}</span>
                     </div>
