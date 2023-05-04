@@ -8,7 +8,7 @@ export default function getProducts(params) {
         dispatch({ type: "GET_products", payload: res.data.products });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   };
 }

@@ -59,9 +59,9 @@ export async function removeItems(id){
 
 export async function editQuantity(obj,id){
     if(token){
-        if(obj<=1){
-            removeItems(id)
-        }
+        // if(obj<=1){
+        //     removeItems(id)
+        // }
         let quantity = obj;
         console.log(obj);
         obj = { quantity };

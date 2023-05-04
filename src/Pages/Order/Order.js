@@ -18,8 +18,9 @@ function Order() {
     const [elementsVisible,setElementsVisible] = useState(true)
     const [isPayPalButtonRendered, setIsPayPalButtonRendered] = useState(false);
     let cartItemsArray = useSelector((state)=>state.cartReducer.cartItems)
-    const [quantity,setQuantity] = useState(cartItemsArray.cart)
+    
     const [items,setItems] = useState([])
+    const [quantity,setQuantity] = useState(items)
     console.log(cartItemsArray.cart);
     let dispatch = useDispatch();
     function handleCloseClick(){
@@ -40,11 +41,12 @@ function Order() {
               })
             console.log(response.data.cart);
             setItems(response.data.cart);
+            // console.log(items);
         }
   useEffect(() => {
-    if(cartItemsArray==null){
-        navigate("/");
-    }else{
+    // if(items.length==0){
+    //     navigate("/");
+    // }else{
         showCart();
         if (!isPayPalButtonRendered) {
             window.paypal
@@ -70,12 +72,12 @@ function Order() {
                 .render(`#asdmnbamdsbn`);
             setIsPayPalButtonRendered(true);
         }
-    }
+    // }
     console.log(cartItemsArray);
-  },[isPayPalButtonRendered]);
+  },[items]);
   return <>
         <Navbar/>
-        <h1 className="font-bold text-xl mx-10 py-4">Cart ({cartItemsArray.cart?.length} item)</h1>
+        <h1 className="font-bold text-xl mx-10 py-4">Cart ({items?.length} item)</h1>
         <div className="cart_head mx-10 flex gap-4">
             
             <div className="w-2/3">
@@ -127,13 +129,13 @@ function Order() {
                     </div>
                     <hr className="my-4 mx-3"/>
                     {
-                    cartItemsArray.cart==null?"":
-                    cartItemsArray.cart?.map((item)=><div className="p-3 ">
+                    items==null?"":
+                    items?.map((item)=><div className="p-3 ">
                         <span className="font-bold text-blue-600 text-sm pr-2">In 200+ people's carts</span>
                         <span className="text-sm border-1 border-blue-600 text-blue-600 p-1">{item.badges}</span>
                         <div className="flex justify-between gap-5">
                             <div className="flex gap-3 items-center p-2 w-1/2">
-                                <img src={item.product?.photos[0]} width="80rem" height="80rem" alt=""/>
+                                <img src={item.product?.mainPhoto} width="80rem" height="80rem" alt=""/>
                                 <div className="flex flex-col">
                                     <span>{item.product?.name.en}</span>
                                     <p className="my-2">${item.product?.priceAfter}</p>
@@ -160,7 +162,7 @@ function Order() {
                                         // }}
                                         />
                                         <span>{item.quantity}</span>
-                                        <AiOutlinePlus onClick={()=>{item.quantity++ ;setQuantity(item.quantity);editQuantity(item.quantity)}} className="cursor-pointer hover:bg-gray-300 rounded-lg"
+                                        <AiOutlinePlus onClick={()=>{item.quantity++ ;setQuantity(item.quantity);editQuantity(item.quantity,item._id)}} className="cursor-pointer hover:bg-gray-300 rounded-lg"
                                         // onClick={()=>{addMoreThanProduct(item)
                                         //     dispatch(cartItems())
                                         // }}

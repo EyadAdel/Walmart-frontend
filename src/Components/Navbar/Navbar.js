@@ -23,6 +23,7 @@ import axiosConfig from "../../axiosConfig/axiosConfig";
 function Navbar() {
   const [total, setTotal] = useState(0);
   let prod = useSelector((state) => state.cartReducer.cartItems);
+  console.log(prod);
   let [totalPrice, Quantity] = countTotalPrice(prod)
   const [inputdata, setInputData] = useState('')
   const [searchDataResult, setSearchDataResult] = useState([])
@@ -153,6 +154,7 @@ function Navbar() {
             className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <AiOutlineHeart />
+            
             <div className="">
               <p className="text-xs font-semibold">Reorder</p>
               <h5 className="text-base">My Items</h5>
@@ -217,15 +219,15 @@ function Navbar() {
             onClick={() => {
               navigate("/order");
             }}
-            className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
+            className="relative flex flex-col justify-center items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <CgShoppingCart />
-            {(token)?<><p className="text-xs">${total}</p><p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
+            {/* {(token)?<><p className="text-xs">${total}</p><p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
               {prod.cart?.length}
             </p></>:<><p className="text-xs">$0</p>
             <p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
               $0.00
-            </p></>}
+            </p></>} */}
           </div>
         </div>
       </div>
