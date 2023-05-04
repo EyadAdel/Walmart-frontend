@@ -48,28 +48,28 @@ function Order() {
         showCart();
         if (!isPayPalButtonRendered) {
             window.paypal
-            ?.Buttons({
-            createOrder: (data, actions) => {
-            return actions.order.create({
-            purchaseUnits: [
-            {
-            amount: {
-            value: 5,
-            // value: total,
-            },
-            },
-            ],
-            })
-            },
-            onApprove: function (data, actions) {
-            return actions.order.capture().then(function (details) {
-            alert("thanks " + details.payer.name.firstName);
-            });
-            },
-            })
-            .render(`#asdmnbamdsbn`);
+                .Buttons({
+                    createOrder: (data, actions) => {
+                        return actions.order.create({
+                            purchaseUnits: [
+                                {
+                                    amount: {
+                                        value: 500.00,
+                                        // value: total,
+                                    },
+                                },
+                            ],
+                        })
+                    },
+                    onApprove: function (data, actions) {
+                        return actions.order.capture().then(function (details) {
+                            alert("thanks for paying" + details.payer.name.firstName);
+                        });
+                    },
+                })
+                .render(`#asdmnbamdsbn`);
             setIsPayPalButtonRendered(true);
-            }
+        }
     }
     console.log(cartItemsArray);
   },[isPayPalButtonRendered]);
@@ -149,7 +149,7 @@ function Order() {
                                 <div className="flex justify-between">
                                     <p className="underline cursor-pointer"
                                     onClick={()=>{removeItems(item?._id)
-                                        dispatch(cartItems())
+                                        // dispatch(cartItems())
                                     }}
                                     >Remove</p>
                                     <p className="underline">save for later</p>
@@ -528,6 +528,7 @@ function Order() {
             <div className="right_side w-1/3">
                 <div className="max-w-xlg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-3">
                     <button className="cursor-pointer text-white rounded-full bg-blue-500 font-bold block w-full mb-3 py-2 ">Continue to checkout</button>
+                    <div id="asdmnbamdsbn"></div>
                     <hr/>
                     <div className="flex justify-between mt-3 px-3">
                         <p className="font-bold">Subtotal(1 item)</p>

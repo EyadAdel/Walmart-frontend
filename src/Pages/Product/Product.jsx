@@ -30,7 +30,7 @@ function Product() {
   const [reviews, setReviews] = useState([]);
   let { id } = useParams();
   let dispatch = useDispatch();
-  let prod = useSelector((state)=>state.cartItems);
+  let prod = useSelector((state)=>state.cartReducer.cartItems);
   // let prod2 = useSelector((state)=>state.cartItems)
   // console.log(prod2);
   console.log(prod);
