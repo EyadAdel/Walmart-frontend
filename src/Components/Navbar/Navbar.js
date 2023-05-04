@@ -22,8 +22,10 @@ import axiosConfig from "../../axiosConfig/axiosConfig";
 
 function Navbar() {
   const [total, setTotal] = useState(0);
-  let prod = useSelector((state) => state.cartItems);
-  let [totalPrice, Quantity] = countTotalPrice(prod)
+
+  let prod = useSelector((state) => state.cartReducer.cartItems);
+  console.log(prod);
+
   const [inputdata, setInputData] = useState('')
   const [searchDataResult, setSearchDataResult] = useState([])
   const navigate = useNavigate();
@@ -41,47 +43,26 @@ function Navbar() {
     })
 
   }
-
   const handleChange = (value) => {
     console.log(value);
     setInputData(value);
     FetchDataSearch(value);
   }
-  // console.log(prod.product);
-  // let [totalPrice , Quantity] = countTotalPrice(prod)
-  console.log(prod);
+
   const countTotal = () => {
     let totalPrice = 0;
     prod.cart?.map((prd) => {
-      console.log(prd.product[0].quantity);
+      console.log(prd.quantity); 
       totalPrice += prd.product?.quantity * prd.product?.priceAfter;
     });
     setTotal(totalPrice);
     console.log(total);
   };
   console.log(total);
+  
   useEffect(() => {
     countTotal();
   }, []);
-  // const handleInputChange = (event) => {
-  //   setQuery(event.target.value);
-  //   console.log(query);
-  //   handleSubmit();
-  // };
-
-  // const handleSubmit = async () => {
-  //   let { data } = await axiosInstance.get(`/product?q=${query}`);
-  //   let results = data.products;
-  //   for (var i = 0; i < results.length; i++) {
-  //     if (
-  //       results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true
-  //     ) {
-  //       setSearchResults([results[i]]);
-  //       console.log(searchResults);
-  //     }
-  //   }
-  //   // setSearchResults(data.products);
-  // };
 
   return (
     <div className="bg-[#017cc2] sticky top-0 z-10">
