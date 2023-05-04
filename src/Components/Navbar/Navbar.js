@@ -43,15 +43,12 @@ function Navbar() {
     })
 
   }
-
   const handleChange = (value) => {
     console.log(value);
     setInputData(value);
     FetchDataSearch(value);
   }
-  // console.log(prod.product);
-  // let [totalPrice , Quantity] = countTotalPrice(prod)
-  console.log(prod);
+
   const countTotal = () => {
     let totalPrice = 0;
     prod.cart?.map((prd) => {
@@ -62,28 +59,10 @@ function Navbar() {
     console.log(total);
   };
   console.log(total);
+  
   useEffect(() => {
     countTotal();
   }, []);
-  // const handleInputChange = (event) => {
-  //   setQuery(event.target.value);
-  //   console.log(query);
-  //   handleSubmit();
-  // };
-
-  // const handleSubmit = async () => {
-  //   let { data } = await axiosInstance.get(`/product?q=${query}`);
-  //   let results = data.products;
-  //   for (var i = 0; i < results.length; i++) {
-  //     if (
-  //       results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true
-  //     ) {
-  //       setSearchResults([results[i]]);
-  //       console.log(searchResults);
-  //     }
-  //   }
-  //   // setSearchResults(data.products);
-  // };
 
   return (
     <div className="bg-[#017cc2] sticky top-0 z-10">
@@ -131,7 +110,7 @@ function Navbar() {
             {inputdata && <div id="SearchResultList">
               {searchDataResult.map((result) => {
                 return <div className='flex justify-between'>
-                  <NavLink to={`/search/${result.departmentID}`} className='no-underline searchListResult'>
+                  <NavLink to={`/search/${result.nestedSubDepartment}`} className='no-underline searchListResult'>
                     <div key={result._id} className=''>
                       <span>{result.name.en}</span>
                     </div>
