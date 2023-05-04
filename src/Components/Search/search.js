@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axiosConfig from '../../axiosConfig/axiosConfig';
 import Navbar from '../Navbar/Navbar';
 import { IoIosArrowDown } from "react-icons/io";
@@ -230,10 +230,12 @@ function Search() {
                         {products.map((product) => (
                             <div className="relative max-w-sm w-60 bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer">
                                 <div className="overflow-x-hidden rounded-2xl relative">
+                                <Link to={`/details/${product._id}`}>
                                     <img
                                         className="h-40 rounded-2xl"
                                         src={product.photos[0]}
                                     />
+                                </Link>
                                     <p className="absolute right-2 top-2 bg-white rounded-full p-2 cursor-pointer group">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

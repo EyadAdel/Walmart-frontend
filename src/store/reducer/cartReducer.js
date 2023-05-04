@@ -8,7 +8,7 @@ const Initial_state = {
 };
 
 export default function getProducts(state = Initial_state, action) {
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case "Cart_Items":
       if (token) {

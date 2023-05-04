@@ -10,27 +10,71 @@ import { addMoreThanProduct, editQuantity, minusProduct, removeItems } from "../
 import { useDispatch, useSelector } from "react-redux";
 import cartItems from "../../store/actions/card";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 function Order() {
     const navigate = useNavigate()
-    const [elementsVisible, setElementsVisible] = useState(true)
-    let cartItemsArray = useSelector((state) => state.cartReducer.cartItems)
-    const [quantity, setQuantity] = useState(cartItemsArray.cart)
-
+    const [elementsVisible,setElementsVisible] = useState(true)
+    const [isPayPalButtonRendered, setIsPayPalButtonRendered] = useState(false);
+    let cartItemsArray = useSelector((state)=>state.cartReducer.cartItems)
+    const [quantity,setQuantity] = useState(cartItemsArray.cart)
+    const [items,setItems] = useState([])
     console.log(cartItemsArray.cart);
     let dispatch = useDispatch();
     function handleCloseClick() {
         setElementsVisible(false);
     }
-    useEffect(() => {
-        if (cartItemsArray == null) {
-            navigate("/");
+    const [cart, setCart] = useState([]);
+    const updateCart = (newCart) => {
+        setCart(newCart);
         }
-        console.log(cartItemsArray);
-    });
-    return <>
-        <Navbar />
+    
+        async function showCart(){
+            const token = localStorage.getItem('Token');
+            let response  = await axios.get("http://localhost:5000/customer/cart",{
+                headers: {
+                  Authorization: token
+                },
+                
+              })
+            console.log(response.data.cart);
+            setItems(response.data.cart);
+        }
+  useEffect(() => {
+    if(cartItemsArray==null){
+        navigate("/");
+    }else{
+        showCart();
+        if (!isPayPalButtonRendered) {
+            window.paypal
+                .Buttons({
+                    createOrder: (data, actions) => {
+                        return actions.order.create({
+                            purchaseUnits: [
+                                {
+                                    amount: {
+                                        value: 500.00,
+                                        // value: total,
+                                    },
+                                },
+                            ],
+                        })
+                    },
+                    onApprove: function (data, actions) {
+                        return actions.order.capture().then(function (details) {
+                            alert("thanks for paying" + details.payer.name.firstName);
+                        });
+                    },
+                })
+                .render(`#asdmnbamdsbn`);
+            setIsPayPalButtonRendered(true);
+        }
+    }
+    console.log(cartItemsArray);
+  },[isPayPalButtonRendered]);
+  return <>
+        <Navbar/>
         <h1 className="font-bold text-xl mx-10 py-4">Cart ({cartItemsArray.cart?.length} item)</h1>
         <div className="cart_head mx-10 flex gap-4">
 
@@ -123,10 +167,38 @@ function Order() {
                                         </div>
 
                                     </div>
+                            </div>
+                            <div className="flex flex-col justify-between w-1/2">
+                                <div className="text-end font-bold">
+                                    ${item.product?.priceAfter*item.quantity}
+                                </div>    
+                                <div className="flex justify-between">
+                                    <p className="underline cursor-pointer"
+                                    onClick={()=>{removeItems(item?._id)
+                                        // dispatch(cartItems())
+                                    }}
+                                    >Remove</p>
+                                    <p className="underline">save for later</p>
+                                    <div className="flex items-center border rounded-full gap-x-5 px-3 py-1">
+                                    <AiOutlineMinus onClick={()=>{item.quantity--;setQuantity(item.quantity);editQuantity(item.quantity,item._id)}} className="cursor-pointer hover:bg-gray-300 rounded-lg "
+                                        // onClick={()=>{minusProduct(item)
+                                        //     dispatch(cartItems())
+                                        // }}
+                                        />
+                                        <span>{item.quantity}</span>
+                                        <AiOutlinePlus onClick={()=>{item.quantity++ ;setQuantity(item.quantity);editQuantity(item.quantity)}} className="cursor-pointer hover:bg-gray-300 rounded-lg"
+                                        // onClick={()=>{addMoreThanProduct(item)
+                                        //     dispatch(cartItems())
+                                        // }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>)}
-
-                </div>
+                                
+                            </div>
+                        </div>
+                    )}
+                    
+                </div>    
                 <div className="max-w-xlg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-14 p-3">
                     <p className="font-bold text-lg my-2">Recommended with your order</p>
                     <div className="flex gap-2 items-end">
@@ -482,7 +554,8 @@ function Order() {
             <div className="right_side w-1/3">
                 <div className="max-w-xlg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-3">
                     <button className="cursor-pointer text-white rounded-full bg-blue-500 font-bold block w-full mb-3 py-2 ">Continue to checkout</button>
-                    <hr />
+                    <div id="asdmnbamdsbn"></div>
+                    <hr/>
                     <div className="flex justify-between mt-3 px-3">
                         <p className="font-bold">Subtotal(1 item)</p>
                         <span>$13.98</span>
