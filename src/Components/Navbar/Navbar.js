@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
 import headerLogo from "../../assets/header-img.png";
@@ -20,9 +20,8 @@ import "./Navbar.css"
 import axiosConfig from "../../axiosConfig/axiosConfig";
 
 
-
 function Navbar() {
-
+  const [total, setTotal] = useState(0);
   let prod = useSelector((state) => state.cartItems);
   let [totalPrice, Quantity] = countTotalPrice(prod)
   const [inputdata, setInputData] = useState('')
@@ -48,6 +47,42 @@ function Navbar() {
     setInputData(value);
     FetchDataSearch(value);
   }
+  // console.log(prod.product);
+  // let [totalPrice , Quantity] = countTotalPrice(prod)
+  console.log(prod);
+  const countTotal = () => {
+    let totalPrice = 0;
+    prod.cart?.map((prd) => {
+      console.log(prd.product[0].quantity);
+      totalPrice += prd.product?.quantity * prd.product?.priceAfter;
+    });
+    setTotal(totalPrice);
+    console.log(total);
+  };
+  console.log(total);
+  useEffect(() => {
+    countTotal();
+  }, []);
+  // const handleInputChange = (event) => {
+  //   setQuery(event.target.value);
+  //   console.log(query);
+  //   handleSubmit();
+  // };
+
+  // const handleSubmit = async () => {
+  //   let { data } = await axiosInstance.get(`/product?q=${query}`);
+  //   let results = data.products;
+  //   for (var i = 0; i < results.length; i++) {
+  //     if (
+  //       results[i].name.en.toLowerCase().includes(query.toLowerCase()) == true
+  //     ) {
+  //       setSearchResults([results[i]]);
+  //       console.log(searchResults);
+  //     }
+  //   }
+  //   // setSearchResults(data.products);
+  // };
+
   return (
     <div className="bg-[#017cc2] sticky top-0 z-10">
       <div className="text-white grid grid-cols-3">
@@ -111,6 +146,9 @@ function Navbar() {
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
             type="button"
+            onClick={() => {
+              navigate("/reorder");
+            }}
             className="flex items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
             <AiOutlineHeart />
@@ -164,8 +202,14 @@ function Navbar() {
                 navigate("/login");
               }}
             >
-              <p className="text-xs font-semibold">Sign In</p>
-              <h5 className="text-base">Account</h5>
+              {localStorage.getItem("Token") ? (
+                <h5>Hi , {prod?.firstName}</h5>
+              ) : (
+                <div>
+                  <p className="text-xs font-semibold">Sign In</p>
+                  <h5 className="text-base">Account</h5>
+                </div>
+              )}
             </div>
           </div>
           <div
@@ -174,10 +218,10 @@ function Navbar() {
             }}
             className="relative flex flex-col items-center gap-x-1 font-semibold	text-[18px] hover:bg-[#155e89] p-3 rounded-full cursor-pointer"
           >
-            <CgShoppingCart className="mt-5"/>
-            <p className="text-xs">{totalPrice}</p>
-            <p className="absolute h-5 w-5 right-2 top-4 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
-              {Quantity}
+            <CgShoppingCart />
+            <p className="text-xs">${total}</p>
+            <p className="absolute  h-5 w-5 right-2 top-1 text-xs text-black border-black border-2  border-solid	 text-center bg-[#ffc220] rounded-full">
+              {prod.cart?.length}
             </p>
           </div>
         </div>
