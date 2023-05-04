@@ -10,24 +10,69 @@ import { addMoreThanProduct, editQuantity, minusProduct, removeItems } from "../
 import { useDispatch, useSelector } from "react-redux";
 import cartItems from "../../store/actions/card";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 function Order() {
     const navigate = useNavigate()
     const [elementsVisible,setElementsVisible] = useState(true)
+    const [isPayPalButtonRendered, setIsPayPalButtonRendered] = useState(false);
     let cartItemsArray = useSelector((state)=>state.cartItems)
-    
+    const [quantity,setQuantity] = useState(cartItemsArray.cart)
+    const [items,setItems] = useState([])
     console.log(cartItemsArray.cart);
     let dispatch = useDispatch();
     function handleCloseClick(){
         setElementsVisible(false);
     }
+    const [cart, setCart] = useState([]);
+    const updateCart = (newCart) => {
+        setCart(newCart);
+        }
+    
+        async function showCart(){
+            const token = localStorage.getItem('Token');
+            let response  = await axios.get("http://localhost:5000/customer/cart",{
+                headers: {
+                  Authorization: token
+                },
+                
+              })
+            console.log(response.data.cart);
+            setItems(response.data.cart);
+        }
   useEffect(() => {
     if(cartItemsArray==null){
         navigate("/");
+    }else{
+        showCart();
+        if (!isPayPalButtonRendered) {
+            window.paypal
+            .Buttons({
+            createOrder: (data, actions) => {
+            return actions.order.create({
+            purchaseUnits: [
+            {
+            amount: {
+            value: 5,
+            // value: total,
+            },
+            },
+            ],
+            })
+            },
+            onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+            alert("thanks " + details.payer.name.firstName);
+            });
+            },
+            })
+            .render(`#asdmnbamdsbn`);
+            setIsPayPalButtonRendered(true);
+            }
     }
     console.log(cartItemsArray);
-  });
+  },[isPayPalButtonRendered]);
   return <>
         <Navbar/>
         <h1 className="font-bold text-xl mx-10 py-4">Cart ({cartItemsArray.cart?.length} item)</h1>
@@ -109,14 +154,14 @@ function Order() {
                                     >Remove</p>
                                     <p className="underline">save for later</p>
                                     <div className="flex items-center border rounded-full gap-x-5 px-3 py-1">
-                                        <AiOutlineMinus className="cursor-pointer hover:bg-gray-300 rounded-lg "
+                                    <AiOutlineMinus onClick={()=>{item.quantity--;setQuantity(item.quantity);editQuantity(item.quantity)}} className="cursor-pointer hover:bg-gray-300 rounded-lg "
                                         // onClick={()=>{minusProduct(item)
                                         //     dispatch(cartItems())
                                         // }}
                                         />
                                         <p><input value={item.quantity} 
                                         onChange={(event)=>{editQuantity(event.target.value)}}/></p>
-                                        <AiOutlinePlus className="cursor-pointer hover:bg-gray-300 rounded-lg"
+                                        <AiOutlinePlus onClick={()=>{item.quantity++ ;setQuantity(item.quantity);editQuantity(item.quantity)}} className="cursor-pointer hover:bg-gray-300 rounded-lg"
                                         // onClick={()=>{addMoreThanProduct(item)
                                         //     dispatch(cartItems())
                                         // }}
