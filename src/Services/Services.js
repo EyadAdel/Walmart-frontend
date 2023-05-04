@@ -57,11 +57,15 @@ export async function removeItems(id){
     }
 }
 
-export async function editQuantity(obj){
+export async function editQuantity(obj,id){
     if(token){
+        if(obj<=1){
+            removeItems(id)
+        }
         let quantity = obj;
         console.log(obj);
         obj = { quantity };
+        
         const response = await axios.put(`http://localhost:5000/customer/cart/${obj._id}`, 
         obj,{
               headers: {

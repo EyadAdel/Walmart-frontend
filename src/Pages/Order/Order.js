@@ -17,7 +17,7 @@ function Order() {
     const navigate = useNavigate()
     const [elementsVisible,setElementsVisible] = useState(true)
     const [isPayPalButtonRendered, setIsPayPalButtonRendered] = useState(false);
-    let cartItemsArray = useSelector((state)=>state.cartItems)
+    let cartItemsArray = useSelector((state)=>state.cartReducer.cartItems)
     const [quantity,setQuantity] = useState(cartItemsArray.cart)
     const [items,setItems] = useState([])
     console.log(cartItemsArray.cart);
@@ -48,7 +48,7 @@ function Order() {
         showCart();
         if (!isPayPalButtonRendered) {
             window.paypal
-            .Buttons({
+            ?.Buttons({
             createOrder: (data, actions) => {
             return actions.order.create({
             purchaseUnits: [
@@ -154,13 +154,12 @@ function Order() {
                                     >Remove</p>
                                     <p className="underline">save for later</p>
                                     <div className="flex items-center border rounded-full gap-x-5 px-3 py-1">
-                                    <AiOutlineMinus onClick={()=>{item.quantity--;setQuantity(item.quantity);editQuantity(item.quantity)}} className="cursor-pointer hover:bg-gray-300 rounded-lg "
+                                    <AiOutlineMinus onClick={()=>{item.quantity--;setQuantity(item.quantity);editQuantity(item.quantity,item._id)}} className="cursor-pointer hover:bg-gray-300 rounded-lg "
                                         // onClick={()=>{minusProduct(item)
                                         //     dispatch(cartItems())
                                         // }}
                                         />
-                                        <p><input value={item.quantity} 
-                                        onChange={(event)=>{editQuantity(event.target.value)}}/></p>
+                                        <span>{item.quantity}</span>
                                         <AiOutlinePlus onClick={()=>{item.quantity++ ;setQuantity(item.quantity);editQuantity(item.quantity)}} className="cursor-pointer hover:bg-gray-300 rounded-lg"
                                         // onClick={()=>{addMoreThanProduct(item)
                                         //     dispatch(cartItems())
